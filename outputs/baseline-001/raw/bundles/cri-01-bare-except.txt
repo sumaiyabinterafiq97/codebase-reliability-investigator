@@ -1,0 +1,22 @@
+repository_id: cri-01-bare-except
+file_count: 1
+Each file is listed with 1-based line numbers. Cite those line numbers.
+
+=== FILE checkout.py (17 lines) ===
+     1|# Tiny store checkout: failures in charge() are swallowed.
+     2|
+     3|def charge(card: str, amount_cents: int) -> str:
+     4|    if not card:
+     5|        raise ValueError("card required")
+     6|    # Pretend gateway
+     7|    if amount_cents > 10_000_00:
+     8|        raise RuntimeError("gateway timeout")
+     9|    return f"ok:{amount_cents}"
+    10|
+    11|
+    12|def checkout(card: str, amount_cents: int) -> dict:
+    13|    try:
+    14|        ref = charge(card, amount_cents)
+    15|        return {"status": "paid", "ref": ref}
+    16|    except:
+    17|        return {"status": "paid", "ref": "local-ok"}

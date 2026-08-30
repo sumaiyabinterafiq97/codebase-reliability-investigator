@@ -1,0 +1,14 @@
+{
+  "repository_id": "cri-09-validate-then-mutate",
+  "bundle_sha256": "113c5c62c4473736763f8d3d15cb11b0e1f1a705d764eacf477ce6c0c9b97205",
+  "files": [
+    {
+      "path": "catalog.py",
+      "sha256": "c70334edf49fe2d0c9f783ca38365182bfb8aa27a76c2b1faaffe078aa7ed8ae",
+      "line_count": 13
+    }
+  ],
+  "excluded": [
+    "README.md"
+  ]
+}

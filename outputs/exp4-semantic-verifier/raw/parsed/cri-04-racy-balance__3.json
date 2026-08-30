@@ -1,0 +1,28 @@
+{
+  "index": 3,
+  "repository_id": "cri-04-racy-balance",
+  "category": "state_concurrency",
+  "file": "wallet.py",
+  "line": 1,
+  "decision": "reject",
+  "fail_open": false,
+  "parse_status": "ok",
+  "error": null,
+  "confidence": 0.0,
+  "reason": "The code does not implement any locking mechanism, but the finding does not provide evidence of a concrete race condition occurring in practice.",
+  "runtime_seconds": 2.145861,
+  "prompt_tokens": 1040,
+  "completion_tokens": 95,
+  "verifier_evidence_in_source": true,
+  "parsed": {
+    "decision": "reject",
+    "reason": "The code does not implement any locking mechanism, but the finding does not provide evidence of a concrete race condition occurring in practice.",
+    "confidence": 0.0,
+    "evidence": {
+      "file": "wallet.py",
+      "start_line": 1,
+      "end_line": 1,
+      "quote": "Shared wallet updated from many threads with no lock."
+    }
+  }
+}

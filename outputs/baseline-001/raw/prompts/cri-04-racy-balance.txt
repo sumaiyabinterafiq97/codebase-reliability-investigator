@@ -1,0 +1,25 @@
+Analyze repository_id=cri-04-racy-balance.
+Return JSON {"findings": [...]} using only the files below.
+
+repository_id: cri-04-racy-balance
+file_count: 1
+Each file is listed with 1-based line numbers. Cite those line numbers.
+
+=== FILE wallet.py (17 lines) ===
+     1|"""Shared wallet updated from many threads with no lock."""
+     2|
+     3|from concurrent.futures import ThreadPoolExecutor
+     4|
+     5|balance_cents = 0
+     6|
+     7|
+     8|def credit(amount_cents: int) -> None:
+     9|    global balance_cents
+    10|    current = balance_cents
+    11|    balance_cents = current + amount_cents
+    12|
+    13|
+    14|def apply_credits(amounts: list[int], workers: int = 8) -> int:
+    15|    with ThreadPoolExecutor(max_workers=workers) as pool:
+    16|        list(pool.map(credit, amounts))
+    17|    return balance_cents

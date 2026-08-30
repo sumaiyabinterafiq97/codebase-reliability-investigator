@@ -1,0 +1,175 @@
+{
+  "system": "baseline-filters",
+  "findings": [
+    {
+      "repository_id": "cri-01-bare-except",
+      "category": "error_handling",
+      "severity": "high",
+      "file": "checkout.py",
+      "line": 16,
+      "line_start": 16,
+      "line_end": 17,
+      "function_name": "checkout",
+      "description": "The exception is caught without handling it properly, leading to a misleading success response even when the charge fails.",
+      "evidence": {
+        "file": "checkout.py",
+        "line_start": 16,
+        "line_end": 17,
+        "quote": "except:\n        return {"
+      }
+    },
+    {
+      "repository_id": "cri-02-unchecked-quantity",
+      "category": "input_validation",
+      "severity": "high",
+      "file": "orders.py",
+      "line": 6,
+      "line_start": 6,
+      "line_end": 7,
+      "function_name": "apply_order",
+      "description": "The function applies an order without validating that the quantity is non-negative and does not exceed the available inventory, which can lead to negative inventory states.",
+      "evidence": {
+        "file": "orders.py",
+        "line_start": 6,
+        "line_end": 7,
+        "quote": "inventory[sku] = inventory.get(sku, 0) - quantity"
+      }
+    },
+    {
+      "repository_id": "cri-03-leaked-file",
+      "category": "resource_lifecycle",
+      "severity": "medium",
+      "file": "audit.py",
+      "line": 1,
+      "line_start": 1,
+      "line_end": 11,
+      "function_name": "append_audit",
+      "description": "The file handle is not closed if the write operation fails, leading to a resource leak.",
+      "evidence": {
+        "file": "audit.py",
+        "line_start": 1,
+        "line_end": 11,
+        "quote": "\"\"\"Write an audit line; handle is not closed if write fails.\"\"\""
+      }
+    },
+    {
+      "repository_id": "cri-04-racy-balance",
+      "category": "state_concurrency",
+      "severity": "high",
+      "file": "wallet.py",
+      "line": 1,
+      "line_start": 1,
+      "line_end": 17,
+      "function_name": "credit",
+      "description": "Shared mutable state 'balance_cents' is updated concurrently without adequate synchronization, leading to potential race conditions.",
+      "evidence": {
+        "file": "wallet.py",
+        "line_start": 1,
+        "line_end": 17,
+        "quote": "\"\"\"Shared wallet updated from many threads with no lock.\"\"\""
+      }
+    },
+    {
+      "repository_id": "cri-05-untested-fallback",
+      "category": "testing_coverage",
+      "severity": "high",
+      "file": "payments.py",
+      "line": 24,
+      "line_start": 24,
+      "line_end": 28,
+      "function_name": "checkout",
+      "description": "The fallback to secondary payment processing in the checkout function is not tested, which could lead to unhandled scenarios in production.",
+      "evidence": {
+        "file": "payments.py",
+        "line_start": 24,
+        "line_end": 28,
+        "quote": "def checkout(amount_cents: int, primary_ok: bool = True) -> str:\n    try:\n        return pay(amount_cents, primary_ok=primary_ok)\n    except TimeoutError_:\n        return charge_secondary(amount_cents)"
+      }
+    },
+    {
+      "repository_id": "cri-06-silent-json-default",
+      "category": "error_handling",
+      "severity": "high",
+      "file": "config.py",
+      "line": 9,
+      "line_start": 9,
+      "line_end": 10,
+      "function_name": "load_settings",
+      "description": "Returning an empty dictionary on failure to load settings can lead to using default values that may not be valid, causing potential issues later when accessing settings.",
+      "evidence": {
+        "file": "config.py",
+        "line_start": 9,
+        "line_end": 10,
+        "quote": "return {}"
+      }
+    },
+    {
+      "repository_id": "cri-07-toctou-inventory",
+      "category": "state_concurrency",
+      "severity": "high",
+      "file": "warehouse.py",
+      "line": 11,
+      "line_start": 11,
+      "line_end": 11,
+      "function_name": "reserve",
+      "description": "The stock is decremented without any locking mechanism, leading to a race condition where two threads can reserve the same stock item simultaneously.",
+      "evidence": {
+        "file": "warehouse.py",
+        "line_start": 11,
+        "line_end": 11,
+        "quote": "stock[sku] = stock[sku] - n"
+      }
+    },
+    {
+      "repository_id": "cri-08-log-then-use-corrupt",
+      "category": "error_handling",
+      "severity": "high",
+      "file": "billing.py",
+      "line": 13,
+      "line_start": 13,
+      "line_end": 14,
+      "function_name": "parse_customer",
+      "description": "Returning the raw input after a failure in parsing, which may lead to using corrupt data in subsequent operations.",
+      "evidence": {
+        "file": "billing.py",
+        "line_start": 13,
+        "line_end": 14,
+        "quote": "return raw"
+      }
+    },
+    {
+      "repository_id": "cri-09-validate-then-mutate",
+      "category": "input_validation",
+      "severity": "medium",
+      "file": "catalog.py",
+      "line": 7,
+      "line_start": 7,
+      "line_end": 7,
+      "function_name": "parse_line",
+      "description": "The code does not validate that the quantity part of the SKU payload is a valid integer before converting it, which could lead to a ValueError if the input is malformed.",
+      "evidence": {
+        "file": "catalog.py",
+        "line_start": 7,
+        "line_end": 7,
+        "quote": "sku, qty_s = item.split(\":\")"
+      }
+    },
+    {
+      "repository_id": "cri-12-locked-and-tested",
+      "category": "error_handling",
+      "severity": "high",
+      "file": "stock.py",
+      "line": 12,
+      "line_start": 12,
+      "line_end": 13,
+      "function_name": "reserve",
+      "description": "The function updates the stock without handling the case where the stock might become negative, which can lead to an invalid state.",
+      "evidence": {
+        "file": "stock.py",
+        "line_start": 12,
+        "line_end": 13,
+        "quote": "stock[sku] = available - n"
+      }
+    }
+  ]
+}

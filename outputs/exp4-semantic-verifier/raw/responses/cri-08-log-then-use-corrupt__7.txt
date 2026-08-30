@@ -1,0 +1,11 @@
+{
+  "decision": "reject",
+  "reason": "The function logs the error and returns the raw input, which may be valid in some contexts. There is no evidence that this leads to corrupt data usage without further context on how the returned data is handled.",
+  "confidence": 0.8,
+  "evidence": {
+    "file": "billing.py",
+    "start_line": 12,
+    "end_line": 13,
+    "quote": "log.error(\"parse failed: %s raw=%s\", exc, raw)"
+  }
+}

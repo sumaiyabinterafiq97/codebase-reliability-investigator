@@ -1,0 +1,11 @@
+{
+  "decision": "confirm",
+  "reason": "The enclosing block does not prevent the stock from becoming negative, as it only checks if available is less than n before updating.",
+  "confidence": 0.9,
+  "evidence": {
+    "file": "stock.py",
+    "start_line": 12,
+    "end_line": 13,
+    "quote": "stock[sku] = available - n"
+  }
+}

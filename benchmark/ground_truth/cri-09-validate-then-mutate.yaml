@@ -1,0 +1,14 @@
+repository_id: cri-09-validate-then-mutate
+language: python
+issues:
+  - issue_id: cri-09-i1
+    category: input_validation
+    severity: medium
+    file: catalog.py
+    line: 7
+    function_name: parse_line
+    description: Only a non-empty string is validated; split and int on derived fields are unchecked.
+    why_reliability: Strings without exactly one colon, or non-integer qty, raise or unpack incorrectly after a check that looked sufficient.
+    expected_evidence: "item.strip() check then item.split(':') and int(qty_s) with no shape/range checks."
+    present: true
+    difficulty: hard

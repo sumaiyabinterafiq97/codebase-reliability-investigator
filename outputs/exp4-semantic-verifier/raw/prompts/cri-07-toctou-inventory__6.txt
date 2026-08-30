@@ -1,0 +1,70 @@
+repository_id: cri-07-toctou-inventory
+category: state_concurrency
+severity: high
+file: warehouse.py
+line: 11
+line_start: 11
+line_end: 11
+function_name: reserve
+description: The stock is decremented without any locking mechanism, leading to a race condition where two threads can reserve the same stock item simultaneously.
+
+TAXONOMY FOR THE CLAIMED CATEGORY:
+state_concurrency
+Qualifies: Shared mutable state accessed from concurrent contexts without adequate synchronization, or check-then-act races.
+Does not qualify: Single-threaded code with no concurrent entrypoints; a lock that covers the critical section.
+
+CLAIMED EVIDENCE QUOTE FROM THE FINDING:
+stock[sku] = stock[sku] - n
+
+EXTRACTED SOURCE SNIPPET AT THE CLAIMED LOCATION:
+        stock[sku] = stock[sku] - n
+
+=== NEARBY warehouse.py lines 3-19 ===
+     3|from threading import Thread
+     4|
+     5|stock = {"widget": 1}
+     6|
+     7|
+     8|def reserve(sku: str, n: int = 1) -> bool:
+     9|    if stock.get(sku, 0) >= n:
+    10|        # Another thread can reserve the same unit here.
+    11|        stock[sku] = stock[sku] - n
+    12|        return True
+    13|    return False
+    14|
+    15|
+    16|def two_customers() -> list[bool]:
+    17|    results: list[bool] = [False, False]
+    18|
+    19|    def buy(i: int) -> None:
+
+FULL SOURCE IN THIS REPOSITORY (for context only; do not hunt new issues):
+=== FILE warehouse.py ===
+     1|"""Warehouse stock: check, then decrement, no lock."""
+     2|
+     3|from threading import Thread
+     4|
+     5|stock = {"widget": 1}
+     6|
+     7|
+     8|def reserve(sku: str, n: int = 1) -> bool:
+     9|    if stock.get(sku, 0) >= n:
+    10|        # Another thread can reserve the same unit here.
+    11|        stock[sku] = stock[sku] - n
+    12|        return True
+    13|    return False
+    14|
+    15|
+    16|def two_customers() -> list[bool]:
+    17|    results: list[bool] = [False, False]
+    18|
+    19|    def buy(i: int) -> None:
+    20|        results[i] = reserve("widget", 1)
+    21|
+    22|    t1 = Thread(target=buy, args=(0,))
+    23|    t2 = Thread(target=buy, args=(1,))
+    24|    t1.start()
+    25|    t2.start()
+    26|    t1.join()
+    27|    t2.join()
+    28|    return results

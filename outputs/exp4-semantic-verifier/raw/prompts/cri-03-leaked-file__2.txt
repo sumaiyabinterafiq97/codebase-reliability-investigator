@@ -1,0 +1,57 @@
+repository_id: cri-03-leaked-file
+category: resource_lifecycle
+severity: medium
+file: audit.py
+line: 1
+line_start: 1
+line_end: 11
+function_name: append_audit
+description: The file handle is not closed if the write operation fails, leading to a resource leak.
+
+TAXONOMY FOR THE CLAIMED CATEGORY:
+resource_lifecycle
+Qualifies: Handles (files, sockets) acquired and not released on some path, including error paths.
+Does not qualify: Correct `with` usage; relying on process exit when there is no exception path that skips close while the process continues.
+
+CLAIMED EVIDENCE QUOTE FROM THE FINDING:
+"""Write an audit line; handle is not closed if write fails."""
+
+EXTRACTED SOURCE SNIPPET AT THE CLAIMED LOCATION:
+"""Write an audit line; handle is not closed if write fails."""
+
+
+def append_audit(path: str, line: str) -> bool:
+    handle = open(path, "a", encoding="utf-8")
+    try:
+        handle.write(line + "\n")
+        handle.close()
+        return True
+    except OSError:
+        return False
+
+=== NEARBY audit.py lines 1-11 ===
+     1|"""Write an audit line; handle is not closed if write fails."""
+     2|
+     3|
+     4|def append_audit(path: str, line: str) -> bool:
+     5|    handle = open(path, "a", encoding="utf-8")
+     6|    try:
+     7|        handle.write(line + "\n")
+     8|        handle.close()
+     9|        return True
+    10|    except OSError:
+    11|        return False
+
+FULL SOURCE IN THIS REPOSITORY (for context only; do not hunt new issues):
+=== FILE audit.py ===
+     1|"""Write an audit line; handle is not closed if write fails."""
+     2|
+     3|
+     4|def append_audit(path: str, line: str) -> bool:
+     5|    handle = open(path, "a", encoding="utf-8")
+     6|    try:
+     7|        handle.write(line + "\n")
+     8|        handle.close()
+     9|        return True
+    10|    except OSError:
+    11|        return False

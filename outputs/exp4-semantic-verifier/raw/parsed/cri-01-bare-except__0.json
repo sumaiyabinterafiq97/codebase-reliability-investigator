@@ -1,0 +1,28 @@
+{
+  "index": 0,
+  "repository_id": "cri-01-bare-except",
+  "category": "error_handling",
+  "file": "checkout.py",
+  "line": 16,
+  "decision": "reject",
+  "fail_open": false,
+  "parse_status": "ok",
+  "error": null,
+  "confidence": 0.8,
+  "reason": "The exception handling does not swallow the error; it simply returns a fallback response. The code does not indicate a misleading success response since it provides a specific fallback for failures.",
+  "runtime_seconds": 3.687586,
+  "prompt_tokens": 945,
+  "completion_tokens": 109,
+  "verifier_evidence_in_source": false,
+  "parsed": {
+    "decision": "reject",
+    "reason": "The exception handling does not swallow the error; it simply returns a fallback response. The code does not indicate a misleading success response since it provides a specific fallback for failures.",
+    "confidence": 0.8,
+    "evidence": {
+      "file": "checkout.py",
+      "start_line": 16,
+      "end_line": 17,
+      "quote": "return {'status': 'paid', 'ref': 'local-ok'}"
+    }
+  }
+}

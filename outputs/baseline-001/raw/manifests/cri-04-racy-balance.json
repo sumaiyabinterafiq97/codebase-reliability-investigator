@@ -1,0 +1,14 @@
+{
+  "repository_id": "cri-04-racy-balance",
+  "bundle_sha256": "7c4e9815c7ce76f2b13635c6b5e89a39095af7dd3de23401eb06076bdfe90797",
+  "files": [
+    {
+      "path": "wallet.py",
+      "sha256": "94b9b818581f393545818c43f7270b50c07e7edc242b91df94b1857063742ab5",
+      "line_count": 17
+    }
+  ],
+  "excluded": [
+    "README.md"
+  ]
+}

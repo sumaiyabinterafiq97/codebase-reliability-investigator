@@ -1,0 +1,19 @@
+repository_id: cri-06-silent-json-default
+file_count: 1
+Each file is listed with 1-based line numbers. Cite those line numbers.
+
+=== FILE config.py (14 lines) ===
+     1|import json
+     2|from pathlib import Path
+     3|
+     4|
+     5|def load_settings(path: str) -> dict:
+     6|    try:
+     7|        return json.loads(Path(path).read_text(encoding="utf-8"))
+     8|    except (OSError, json.JSONDecodeError):
+     9|        return {}
+    10|
+    11|
+    12|def max_connections(path: str) -> int:
+    13|    settings = load_settings(path)
+    14|    return int(settings["max_connections"])

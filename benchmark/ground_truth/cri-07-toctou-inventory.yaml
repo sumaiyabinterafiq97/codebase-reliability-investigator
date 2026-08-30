@@ -1,0 +1,14 @@
+repository_id: cri-07-toctou-inventory
+language: python
+issues:
+  - issue_id: cri-07-i1
+    category: state_concurrency
+    severity: high
+    file: warehouse.py
+    line: 9
+    function_name: reserve
+    description: reserve checks stock then decrements without holding a lock; two_customers runs concurrent reserves.
+    why_reliability: Check-then-act on one widget can oversell (both threads observe stock >= 1).
+    expected_evidence: if stock.get(sku, 0) >= n followed by stock[sku] = stock[sku] - n; Thread usage in two_customers.
+    present: true
+    difficulty: hard

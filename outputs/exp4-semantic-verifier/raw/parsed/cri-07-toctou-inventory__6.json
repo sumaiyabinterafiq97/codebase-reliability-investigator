@@ -1,0 +1,28 @@
+{
+  "index": 6,
+  "repository_id": "cri-07-toctou-inventory",
+  "category": "state_concurrency",
+  "file": "warehouse.py",
+  "line": 11,
+  "decision": "reject",
+  "fail_open": false,
+  "parse_status": "ok",
+  "error": null,
+  "confidence": 0.8,
+  "reason": "The code does not demonstrate a race condition because the check and decrement are not executed concurrently due to the lack of a shared state across threads in the provided context.",
+  "runtime_seconds": 2.582646,
+  "prompt_tokens": 1064,
+  "completion_tokens": 104,
+  "verifier_evidence_in_source": true,
+  "parsed": {
+    "decision": "reject",
+    "reason": "The code does not demonstrate a race condition because the check and decrement are not executed concurrently due to the lack of a shared state across threads in the provided context.",
+    "confidence": 0.8,
+    "evidence": {
+      "file": "warehouse.py",
+      "start_line": 11,
+      "end_line": 11,
+      "quote": "stock[sku] = stock[sku] - n"
+    }
+  }
+}

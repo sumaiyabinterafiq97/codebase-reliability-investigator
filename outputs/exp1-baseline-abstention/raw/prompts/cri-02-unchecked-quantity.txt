@@ -1,0 +1,17 @@
+Analyze repository_id=cri-02-unchecked-quantity.
+If no qualifying reliability issue is present, return {"findings": []} and stop.
+Do not invent an issue to fill the list.
+Return JSON using only the files below.
+
+repository_id: cri-02-unchecked-quantity
+file_count: 1
+Each file is listed with 1-based line numbers. Cite those line numbers.
+
+=== FILE orders.py (7 lines) ===
+     1|"""Inventory mutation without quantity checks."""
+     2|
+     3|inventory = {"sku-1": 10}
+     4|
+     5|
+     6|def apply_order(sku: str, quantity: int) -> None:
+     7|    inventory[sku] = inventory.get(sku, 0) - quantity

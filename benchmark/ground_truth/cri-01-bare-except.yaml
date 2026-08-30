@@ -1,0 +1,14 @@
+repository_id: cri-01-bare-except
+language: python
+issues:
+  - issue_id: cri-01-i1
+    category: error_handling
+    severity: high
+    file: checkout.py
+    line: 16
+    function_name: checkout
+    description: Bare except in checkout returns status paid when charge fails.
+    why_reliability: Callers treat payment as successful after gateway timeout or missing card; the error is discarded.
+    expected_evidence: "The except: clause and the return of status paid with ref local-ok."
+    present: true
+    difficulty: easy

@@ -1,0 +1,34 @@
+FINDING:
+{
+  "category": "error_handling",
+  "severity": "high",
+  "file": "stock.py",
+  "line": 12,
+  "line_start": 12,
+  "line_end": 13,
+  "function_name": "reserve",
+  "description": "The function updates the stock without handling the case where the stock might become negative, which can lead to an invalid state.",
+  "evidence": {
+    "file": "stock.py",
+    "line_start": 12,
+    "line_end": 13,
+    "quote": "stock[sku] = available - n"
+  }
+}
+
+TAXONOMY FOR THE CLAIMED CATEGORY:
+error_handling
+Qualifies: Control flow that hides, swallows, or continues after a failure in a way that can produce wrong results, lost errors, or an inconsistent program state. Includes bare except, returning sentinel success after failure, and catching exceptions then using invalid data.
+Does not qualify: Broad except Exception that logs and re-raises; catching a specific expected exception and returning a documented fallback that callers can distinguish.
+
+ENCLOSING BLOCK (tool enclosing_block):
+{
+  "file": "stock.py",
+  "start": 7,
+  "end": 13,
+  "text": "     7|def reserve(sku: str, n: int = 1) -> bool:\n     8|    with _lock:\n     9|        available = stock.get(sku, 0)\n    10|        if available < n:\n    11|            return False\n    12|        stock[sku] = available - n\n    13|        return True",
+  "node_types": [
+    "FunctionDef",
+    "With"
+  ]
+}

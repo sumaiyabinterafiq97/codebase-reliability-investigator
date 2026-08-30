@@ -1,0 +1,70 @@
+{
+  "repository_id": "cri-12-locked-and-tested",
+  "system": "baseline-filters-gated-verifier",
+  "events": [
+    {
+      "sequence": 1,
+      "kind": "instruction",
+      "content": "You are reviewing ONE candidate reliability finding.\n\nYou receive the finding (category, description, evidence) and the result of a single deterministic tool, enclosing_block, which is a numbered source slice around the cited location plus AST node types.\n\nYour job is to confirm or reject this candidate only. You do not search for other bugs. You do not invent new findings.\n\nDecision prior: CONFIRM unless the supplied enclosing block contains concrete defensive control flow that prevents the claimed failure.\n\nDo not default to reject. Absence of an exception handler is not by itself a reason to reject an error_handling finding. For an error_handling claim, consider whether the surrounding code actually demonstrates that the alleged failure is prevented (an explicit preceding branch or other control flow that stops the claimed invalid state), rather than assuming the candidate is wrong because there is no exception handler.\n\nReject only when the enclosing block makes the claimed failure concretely impossible. If the block is merely suspicious, incomplete, or lacks a handler, CONFIRM.\n\nReply with a JSON object only, no markdown, exactly this schema:\n{\n  \"decision\": \"confirm\" or \"reject\",\n  \"reason\": \"short justification referring to the enclosing block\",\n  \"confidence\": 0.0,\n  \"evidence\": {\n    \"file\": \"repo-relative path\",\n    \"start_line\": 1,\n    \"end_line\": 1,\n    \"quote\": \"verbatim snippet that supports YOUR decision\"\n  }\n}\n",
+      "tool_name": null,
+      "tool_args": null,
+      "ok": null
+    },
+    {
+      "sequence": 2,
+      "kind": "action",
+      "content": "{\n  \"category\": \"error_handling\",\n  \"file\": \"stock.py\",\n  \"description\": \"The function updates the stock without handling the case where the stock might become negative, which can lead to an invalid state.\",\n  \"evidence\": {\n    \"file\": \"stock.py\",\n    \"line_start\": 12,\n    \"line_end\": 13,\n    \"quote\": \"stock[sku] = available - n\"\n  },\n  \"span\": [\n    12,\n    13\n  ]\n}",
+      "tool_name": null,
+      "tool_args": null,
+      "ok": null
+    },
+    {
+      "sequence": 3,
+      "kind": "action",
+      "content": "enclosing_block",
+      "tool_name": "enclosing_block",
+      "tool_args": {
+        "path": "stock.py",
+        "start_line": 12,
+        "end_line": 13
+      },
+      "ok": null
+    },
+    {
+      "sequence": 4,
+      "kind": "tool_result",
+      "content": "{\n  \"file\": \"stock.py\",\n  \"start\": 7,\n  \"end\": 13,\n  \"text\": \"     7|def reserve(sku: str, n: int = 1) -> bool:\\n     8|    with _lock:\\n     9|        available = stock.get(sku, 0)\\n    10|        if available < n:\\n    11|            return False\\n    12|        stock[sku] = available - n\\n    13|        return True\",\n  \"node_types\": [\n    \"FunctionDef\",\n    \"With\"\n  ]\n}",
+      "tool_name": "enclosing_block",
+      "tool_args": {
+        "path": "stock.py",
+        "start_line": 12,
+        "end_line": 13
+      },
+      "ok": true
+    },
+    {
+      "sequence": 5,
+      "kind": "action",
+      "content": "llm_complete",
+      "tool_name": null,
+      "tool_args": null,
+      "ok": null
+    },
+    {
+      "sequence": 6,
+      "kind": "feedback",
+      "content": "{\n  \"decision\": \"confirm\",\n  \"reason\": \"The enclosing block does not prevent the stock from becoming negative, as it only checks if available is less than n before updating.\",\n  \"confidence\": 0.9,\n  \"evidence\": {\n    \"file\": \"stock.py\",\n    \"start_line\": 12,\n    \"end_line\": 13,\n    \"quote\": \"stock[sku] = available - n\"\n  }\n}",
+      "tool_name": null,
+      "tool_args": null,
+      "ok": true
+    },
+    {
+      "sequence": 7,
+      "kind": "feedback",
+      "content": "{\n  \"decision\": \"confirm\",\n  \"reason\": \"The enclosing block does not prevent the stock from becoming negative, as it only checks if available is less than n before updating.\",\n  \"confidence\": 0.9,\n  \"kept\": true\n}",
+      "tool_name": null,
+      "tool_args": null,
+      "ok": true
+    }
+  ]
+}

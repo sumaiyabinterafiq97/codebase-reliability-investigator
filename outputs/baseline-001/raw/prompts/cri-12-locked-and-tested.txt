@@ -1,0 +1,36 @@
+Analyze repository_id=cri-12-locked-and-tested.
+Return JSON {"findings": [...]} using only the files below.
+
+repository_id: cri-12-locked-and-tested
+file_count: 2
+Each file is listed with 1-based line numbers. Cite those line numbers.
+
+=== FILE stock.py (13 lines) ===
+     1|from threading import Lock
+     2|
+     3|_lock = Lock()
+     4|stock = {"widget": 5}
+     5|
+     6|
+     7|def reserve(sku: str, n: int = 1) -> bool:
+     8|    with _lock:
+     9|        available = stock.get(sku, 0)
+    10|        if available < n:
+    11|            return False
+    12|        stock[sku] = available - n
+    13|        return True
+
+=== FILE test_stock.py (13 lines) ===
+     1|from stock import reserve, stock
+     2|
+     3|
+     4|def test_reserve_ok():
+     5|    stock["widget"] = 2
+     6|    assert reserve("widget", 1) is True
+     7|    assert stock["widget"] == 1
+     8|
+     9|
+    10|def test_reserve_insufficient():
+    11|    stock["widget"] = 0
+    12|    assert reserve("widget", 1) is False
+    13|    assert stock["widget"] == 0

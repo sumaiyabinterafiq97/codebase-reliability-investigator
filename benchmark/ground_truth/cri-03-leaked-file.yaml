@@ -1,0 +1,14 @@
+repository_id: cri-03-leaked-file
+language: python
+issues:
+  - issue_id: cri-03-i1
+    category: resource_lifecycle
+    severity: medium
+    file: audit.py
+    line: 11
+    function_name: append_audit
+    description: On OSError after open, append_audit returns False without closing the file handle.
+    why_reliability: The descriptor leaks on the error path; the function is reusable so this is not a process-exit-only script.
+    expected_evidence: "open() then except OSError: return False with no handle.close or context manager on that path."
+    present: true
+    difficulty: easy

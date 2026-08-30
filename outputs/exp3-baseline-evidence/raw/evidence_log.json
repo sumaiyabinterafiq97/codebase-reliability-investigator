@@ -1,0 +1,74 @@
+[
+  {
+    "repository_id": "cri-01-bare-except",
+    "file": "checkout.py",
+    "status": "ok",
+    "kept": true
+  },
+  {
+    "repository_id": "cri-02-unchecked-quantity",
+    "file": "orders.py",
+    "status": "ok",
+    "kept": true
+  },
+  {
+    "repository_id": "cri-03-leaked-file",
+    "file": "audit.py",
+    "status": "ok",
+    "kept": true
+  },
+  {
+    "repository_id": "cri-04-racy-balance",
+    "file": "wallet.py",
+    "status": "ok",
+    "kept": true
+  },
+  {
+    "repository_id": "cri-05-untested-fallback",
+    "file": "payments.py",
+    "status": "ok",
+    "kept": true
+  },
+  {
+    "repository_id": "cri-06-silent-json-default",
+    "file": "config.py",
+    "status": "ok",
+    "kept": true
+  },
+  {
+    "repository_id": "cri-07-toctou-inventory",
+    "file": "warehouse.py",
+    "status": "ok",
+    "kept": true
+  },
+  {
+    "repository_id": "cri-08-log-then-use-corrupt",
+    "file": "billing.py",
+    "status": "ok",
+    "kept": true
+  },
+  {
+    "repository_id": "cri-09-validate-then-mutate",
+    "file": "catalog.py",
+    "status": "ok",
+    "kept": true
+  },
+  {
+    "repository_id": "cri-10-logged-reraise",
+    "file": "transfers.py",
+    "status": "ok",
+    "kept": true
+  },
+  {
+    "repository_id": "cri-11-clean-checkout",
+    "file": "store.py",
+    "status": "ok",
+    "kept": true
+  },
+  {
+    "repository_id": "cri-12-locked-and-tested",
+    "file": "stock.py",
+    "status": "ok",
+    "kept": true
+  }
+]

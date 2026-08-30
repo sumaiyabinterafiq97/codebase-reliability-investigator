@@ -1,0 +1,66 @@
+[
+  {
+    "repository_id": "cri-01-bare-except",
+    "category": "error_handling",
+    "file": "checkout.py",
+    "line": 16,
+    "suppressed": false,
+    "filter": null
+  },
+  {
+    "repository_id": "cri-02-unchecked-quantity",
+    "category": "input_validation",
+    "file": "orders.py",
+    "line": 6,
+    "suppressed": false,
+    "filter": null
+  },
+  {
+    "repository_id": "cri-03-leaked-file",
+    "category": "resource_lifecycle",
+    "file": "audit.py",
+    "line": 5,
+    "suppressed": false,
+    "filter": null
+  },
+  {
+    "repository_id": "cri-04-racy-balance",
+    "category": "state_concurrency",
+    "file": "wallet.py",
+    "line": 8,
+    "suppressed": false,
+    "filter": null
+  },
+  {
+    "repository_id": "cri-05-untested-fallback",
+    "category": "testing_coverage",
+    "file": "test_payments.py",
+    "line": 4,
+    "suppressed": true,
+    "filter": "testing_coverage_cites_test_file"
+  },
+  {
+    "repository_id": "cri-06-silent-json-default",
+    "category": "error_handling",
+    "file": "config.py",
+    "line": 9,
+    "suppressed": false,
+    "filter": null
+  },
+  {
+    "repository_id": "cri-07-toctou-inventory",
+    "category": "state_concurrency",
+    "file": "warehouse.py",
+    "line": 11,
+    "suppressed": false,
+    "filter": null
+  },
+  {
+    "repository_id": "cri-08-log-then-use-corrupt",
+    "category": "error_handling",
+    "file": "billing.py",
+    "line": 13,
+    "suppressed": false,
+    "filter": null
+  }
+]

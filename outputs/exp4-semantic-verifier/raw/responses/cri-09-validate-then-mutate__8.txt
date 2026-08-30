@@ -1,0 +1,11 @@
+{
+  "decision": "reject",
+  "reason": "The function does not validate the quantity part of the SKU payload, but the context shows that the input is already split and the error handling for invalid integer conversion is not demonstrated as a failure path.",
+  "confidence": 0.0,
+  "evidence": {
+    "file": "catalog.py",
+    "start_line": 7,
+    "end_line": 7,
+    "quote": "sku, qty_s = item.split(':')"
+  }
+}

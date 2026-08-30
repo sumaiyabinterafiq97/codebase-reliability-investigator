@@ -1,0 +1,14 @@
+repository_id: cri-05-untested-fallback
+language: python
+issues:
+  - issue_id: cri-05-i1
+    category: testing_coverage
+    severity: high
+    file: payments.py
+    line: 27
+    function_name: checkout
+    description: Timeout fallback to charge_secondary is not exercised by tests.
+    why_reliability: The recovery path is load-bearing; test_payments.py only asserts the primary happy path.
+    expected_evidence: except TimeoutError_ return charge_secondary; test_happy_path only calls checkout(100).
+    present: true
+    difficulty: medium

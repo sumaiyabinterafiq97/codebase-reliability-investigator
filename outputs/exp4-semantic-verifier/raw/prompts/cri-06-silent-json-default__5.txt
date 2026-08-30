@@ -1,0 +1,54 @@
+repository_id: cri-06-silent-json-default
+category: error_handling
+severity: high
+file: config.py
+line: 9
+line_start: 9
+line_end: 10
+function_name: load_settings
+description: Returning an empty dictionary on failure to load settings can lead to using default values that may not be valid, causing potential issues later when accessing settings.
+
+TAXONOMY FOR THE CLAIMED CATEGORY:
+error_handling
+Qualifies: Control flow that hides, swallows, or continues after a failure in a way that can produce wrong results, lost errors, or an inconsistent program state. Includes bare except, returning sentinel success after failure, and catching exceptions then using invalid data.
+Does not qualify: Broad except Exception that logs and re-raises; catching a specific expected exception and returning a documented fallback that callers can distinguish.
+
+CLAIMED EVIDENCE QUOTE FROM THE FINDING:
+return {}
+
+EXTRACTED SOURCE SNIPPET AT THE CLAIMED LOCATION:
+        return {}
+
+
+=== NEARBY config.py lines 1-14 ===
+     1|import json
+     2|from pathlib import Path
+     3|
+     4|
+     5|def load_settings(path: str) -> dict:
+     6|    try:
+     7|        return json.loads(Path(path).read_text(encoding="utf-8"))
+     8|    except (OSError, json.JSONDecodeError):
+     9|        return {}
+    10|
+    11|
+    12|def max_connections(path: str) -> int:
+    13|    settings = load_settings(path)
+    14|    return int(settings["max_connections"])
+
+FULL SOURCE IN THIS REPOSITORY (for context only; do not hunt new issues):
+=== FILE config.py ===
+     1|import json
+     2|from pathlib import Path
+     3|
+     4|
+     5|def load_settings(path: str) -> dict:
+     6|    try:
+     7|        return json.loads(Path(path).read_text(encoding="utf-8"))
+     8|    except (OSError, json.JSONDecodeError):
+     9|        return {}
+    10|
+    11|
+    12|def max_connections(path: str) -> int:
+    13|    settings = load_settings(path)
+    14|    return int(settings["max_connections"])

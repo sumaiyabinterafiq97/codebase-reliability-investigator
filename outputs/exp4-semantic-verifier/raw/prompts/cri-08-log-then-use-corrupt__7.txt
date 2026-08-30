@@ -1,0 +1,60 @@
+repository_id: cri-08-log-then-use-corrupt
+category: error_handling
+severity: high
+file: billing.py
+line: 13
+line_start: 13
+line_end: 14
+function_name: parse_customer
+description: Returning the raw input after a failure in parsing, which may lead to using corrupt data in subsequent operations.
+
+TAXONOMY FOR THE CLAIMED CATEGORY:
+error_handling
+Qualifies: Control flow that hides, swallows, or continues after a failure in a way that can produce wrong results, lost errors, or an inconsistent program state. Includes bare except, returning sentinel success after failure, and catching exceptions then using invalid data.
+Does not qualify: Broad except Exception that logs and re-raises; catching a specific expected exception and returning a documented fallback that callers can distinguish.
+
+CLAIMED EVIDENCE QUOTE FROM THE FINDING:
+return raw
+
+EXTRACTED SOURCE SNIPPET AT THE CLAIMED LOCATION:
+        return raw
+
+
+=== NEARBY billing.py lines 5-19 ===
+     5|
+     6|def parse_customer(raw: dict) -> dict:
+     7|    try:
+     8|        account_id = raw["account_id"]
+     9|        cents = int(raw["balance_cents"])
+    10|        return {"account_id": account_id, "balance_cents": cents}
+    11|    except (KeyError, TypeError, ValueError) as exc:
+    12|        log.error("parse failed: %s raw=%s", exc, raw)
+    13|        return raw
+    14|
+    15|
+    16|def debit(raw: dict, amount_cents: int) -> dict:
+    17|    customer = parse_customer(raw)
+    18|    customer["balance_cents"] = customer["balance_cents"] - amount_cents
+    19|    return customer
+
+FULL SOURCE IN THIS REPOSITORY (for context only; do not hunt new issues):
+=== FILE billing.py ===
+     1|import logging
+     2|
+     3|log = logging.getLogger("billing")
+     4|
+     5|
+     6|def parse_customer(raw: dict) -> dict:
+     7|    try:
+     8|        account_id = raw["account_id"]
+     9|        cents = int(raw["balance_cents"])
+    10|        return {"account_id": account_id, "balance_cents": cents}
+    11|    except (KeyError, TypeError, ValueError) as exc:
+    12|        log.error("parse failed: %s raw=%s", exc, raw)
+    13|        return raw
+    14|
+    15|
+    16|def debit(raw: dict, amount_cents: int) -> dict:
+    17|    customer = parse_customer(raw)
+    18|    customer["balance_cents"] = customer["balance_cents"] - amount_cents
+    19|    return customer

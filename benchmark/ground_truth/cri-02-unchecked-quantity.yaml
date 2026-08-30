@@ -1,0 +1,14 @@
+repository_id: cri-02-unchecked-quantity
+language: python
+issues:
+  - issue_id: cri-02-i1
+    category: input_validation
+    severity: high
+    file: orders.py
+    line: 7
+    function_name: apply_order
+    description: apply_order subtracts quantity with no check that it is a positive integer.
+    why_reliability: Zero or negative quantity increases inventory and breaks the stock invariant.
+    expected_evidence: inventory[sku] = inventory.get(sku, 0) - quantity with no preceding validation.
+    present: true
+    difficulty: easy

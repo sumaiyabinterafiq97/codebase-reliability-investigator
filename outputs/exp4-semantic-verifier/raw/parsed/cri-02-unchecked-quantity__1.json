@@ -1,0 +1,28 @@
+{
+  "index": 1,
+  "repository_id": "cri-02-unchecked-quantity",
+  "category": "input_validation",
+  "file": "orders.py",
+  "line": 6,
+  "decision": "reject",
+  "fail_open": false,
+  "parse_status": "ok",
+  "error": null,
+  "confidence": 0.7,
+  "reason": "The function does not validate the quantity, but there is no evidence of negative inventory states since the context does not show how 'quantity' is sourced or if it can be negative.",
+  "runtime_seconds": 2.06155,
+  "prompt_tokens": 801,
+  "completion_tokens": 112,
+  "verifier_evidence_in_source": true,
+  "parsed": {
+    "decision": "reject",
+    "reason": "The function does not validate the quantity, but there is no evidence of negative inventory states since the context does not show how 'quantity' is sourced or if it can be negative.",
+    "confidence": 0.7,
+    "evidence": {
+      "file": "orders.py",
+      "start_line": 6,
+      "end_line": 7,
+      "quote": "inventory[sku] = inventory.get(sku, 0) - quantity"
+    }
+  }
+}

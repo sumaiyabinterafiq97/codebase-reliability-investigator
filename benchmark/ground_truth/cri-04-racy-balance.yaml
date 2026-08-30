@@ -1,0 +1,14 @@
+repository_id: cri-04-racy-balance
+language: python
+issues:
+  - issue_id: cri-04-i1
+    category: state_concurrency
+    severity: high
+    file: wallet.py
+    line: 10
+    function_name: credit
+    description: credit reads and writes global balance_cents without a lock while apply_credits uses a thread pool.
+    why_reliability: Concurrent read-modify-write can drop credits (lost update) on money-like state.
+    expected_evidence: current = balance_cents; balance_cents = current + amount_cents plus ThreadPoolExecutor map.
+    present: true
+    difficulty: medium

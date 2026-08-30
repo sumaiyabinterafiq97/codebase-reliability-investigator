@@ -1,0 +1,27 @@
+Analyze repository_id=cri-10-logged-reraise.
+Return JSON {"findings": [...]} using only the files below.
+
+repository_id: cri-10-logged-reraise
+file_count: 1
+Each file is listed with 1-based line numbers. Cite those line numbers.
+
+=== FILE transfers.py (19 lines) ===
+     1|import logging
+     2|
+     3|log = logging.getLogger("transfers")
+     4|
+     5|
+     6|def send(amount_cents: int) -> str:
+     7|    if amount_cents <= 0:
+     8|        raise ValueError("amount must be positive")
+     9|    if amount_cents > 1_000_000_00:
+    10|        raise RuntimeError("limit")
+    11|    return f"sent:{amount_cents}"
+    12|
+    13|
+    14|def transfer(amount_cents: int) -> str:
+    15|    try:
+    16|        return send(amount_cents)
+    17|    except Exception:
+    18|        log.exception("transfer failed amount=%s", amount_cents)
+    19|        raise

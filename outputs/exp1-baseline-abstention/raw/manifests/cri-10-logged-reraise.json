@@ -1,0 +1,14 @@
+{
+  "repository_id": "cri-10-logged-reraise",
+  "bundle_sha256": "861d1799c830d4bc05bd6130d324a92a69a323d750d97cfb10d6d01b907fbee8",
+  "files": [
+    {
+      "path": "transfers.py",
+      "sha256": "a896ba6b402ebb671b2dadb9ee4e05e7163ebb94c721a0eb2de5f1492fa59c6a",
+      "line_count": 19
+    }
+  ],
+  "excluded": [
+    "README.md"
+  ]
+}

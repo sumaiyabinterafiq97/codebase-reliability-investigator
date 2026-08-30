@@ -1,0 +1,66 @@
+# Case index (machine-readable)
+
+version: 1
+language: python
+cases:
+  - id: cri-01-bare-except
+    path: repositories/cri-01-bare-except
+    ground_truth: ground_truth/cri-01-bare-except.yaml
+    difficulty: easy
+    has_issue: true
+  - id: cri-02-unchecked-quantity
+    path: repositories/cri-02-unchecked-quantity
+    ground_truth: ground_truth/cri-02-unchecked-quantity.yaml
+    difficulty: easy
+    has_issue: true
+  - id: cri-03-leaked-file
+    path: repositories/cri-03-leaked-file
+    ground_truth: ground_truth/cri-03-leaked-file.yaml
+    difficulty: easy
+    has_issue: true
+  - id: cri-04-racy-balance
+    path: repositories/cri-04-racy-balance
+    ground_truth: ground_truth/cri-04-racy-balance.yaml
+    difficulty: medium
+    has_issue: true
+  - id: cri-05-untested-fallback
+    path: repositories/cri-05-untested-fallback
+    ground_truth: ground_truth/cri-05-untested-fallback.yaml
+    difficulty: medium
+    has_issue: true
+  - id: cri-06-silent-json-default
+    path: repositories/cri-06-silent-json-default
+    ground_truth: ground_truth/cri-06-silent-json-default.yaml
+    difficulty: medium
+    has_issue: true
+  - id: cri-07-toctou-inventory
+    path: repositories/cri-07-toctou-inventory
+    ground_truth: ground_truth/cri-07-toctou-inventory.yaml
+    difficulty: hard
+    has_issue: true
+  - id: cri-08-log-then-use-corrupt
+    path: repositories/cri-08-log-then-use-corrupt
+    ground_truth: ground_truth/cri-08-log-then-use-corrupt.yaml
+    difficulty: hard
+    has_issue: true
+  - id: cri-09-validate-then-mutate
+    path: repositories/cri-09-validate-then-mutate
+    ground_truth: ground_truth/cri-09-validate-then-mutate.yaml
+    difficulty: hard
+    has_issue: true
+  - id: cri-10-logged-reraise
+    path: repositories/cri-10-logged-reraise
+    ground_truth: ground_truth/cri-10-logged-reraise.yaml
+    difficulty: hard
+    has_issue: false
+    notes: False-positive trap for naive LLMs (broad except that re-raises).
+  - id: cri-11-clean-checkout
+    path: repositories/cri-11-clean-checkout
+    ground_truth: ground_truth/cri-11-clean-checkout.yaml
+    difficulty: easy
+    has_issue: false
+  - id: cri-12-locked-and-tested
+    path: repositories/cri-12-locked-and-tested
+    ground_truth: ground_truth/cri-12-locked-and-tested.yaml
+    difficulty: medium
+    has_issue: false

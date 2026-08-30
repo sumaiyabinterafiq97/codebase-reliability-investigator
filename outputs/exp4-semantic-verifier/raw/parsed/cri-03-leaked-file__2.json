@@ -1,0 +1,28 @@
+{
+  "index": 2,
+  "repository_id": "cri-03-leaked-file",
+  "category": "resource_lifecycle",
+  "file": "audit.py",
+  "line": 1,
+  "decision": "reject",
+  "fail_open": false,
+  "parse_status": "ok",
+  "error": null,
+  "confidence": 0.9,
+  "reason": "The file handle is closed in the try block after the write operation, so there is no resource leak if the write fails.",
+  "runtime_seconds": 1.702279,
+  "prompt_tokens": 886,
+  "completion_tokens": 120,
+  "verifier_evidence_in_source": false,
+  "parsed": {
+    "decision": "reject",
+    "reason": "The file handle is closed in the try block after the write operation, so there is no resource leak if the write fails.",
+    "confidence": 0.9,
+    "evidence": {
+      "file": "audit.py",
+      "start_line": 5,
+      "end_line": 8,
+      "quote": "handle = open(path, \"a\", encoding=\"utf-8\")\ntry:\n    handle.write(line + \"\\n\")\n    handle.close()"
+    }
+  }
+}

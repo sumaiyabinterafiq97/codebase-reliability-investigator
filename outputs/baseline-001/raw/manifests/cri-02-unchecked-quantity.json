@@ -1,0 +1,14 @@
+{
+  "repository_id": "cri-02-unchecked-quantity",
+  "bundle_sha256": "54fcb5c77394847b6ac5235c63c9bef01c05ed00b63feb0b70e778c6fed1e9b0",
+  "files": [
+    {
+      "path": "orders.py",
+      "sha256": "0a8700d0e949cbb4774860995df82d4d4c74681ac2f38204516c9a11005d2116",
+      "line_count": 7
+    }
+  ],
+  "excluded": [
+    "README.md"
+  ]
+}

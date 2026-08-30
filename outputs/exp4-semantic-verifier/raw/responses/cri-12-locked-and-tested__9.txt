@@ -1,0 +1,11 @@
+{
+  "decision": "reject",
+  "reason": "The function correctly checks if there is enough stock before updating, preventing negative stock values.",
+  "confidence": 0.9,
+  "evidence": {
+    "file": "stock.py",
+    "start_line": 10,
+    "end_line": 11,
+    "quote": "if available < n: return False"
+  }
+}

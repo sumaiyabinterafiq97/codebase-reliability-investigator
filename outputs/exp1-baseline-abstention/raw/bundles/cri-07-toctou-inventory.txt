@@ -1,0 +1,33 @@
+repository_id: cri-07-toctou-inventory
+file_count: 1
+Each file is listed with 1-based line numbers. Cite those line numbers.
+
+=== FILE warehouse.py (28 lines) ===
+     1|"""Warehouse stock: check, then decrement, no lock."""
+     2|
+     3|from threading import Thread
+     4|
+     5|stock = {"widget": 1}
+     6|
+     7|
+     8|def reserve(sku: str, n: int = 1) -> bool:
+     9|    if stock.get(sku, 0) >= n:
+    10|        # Another thread can reserve the same unit here.
+    11|        stock[sku] = stock[sku] - n
+    12|        return True
+    13|    return False
+    14|
+    15|
+    16|def two_customers() -> list[bool]:
+    17|    results: list[bool] = [False, False]
+    18|
+    19|    def buy(i: int) -> None:
+    20|        results[i] = reserve("widget", 1)
+    21|
+    22|    t1 = Thread(target=buy, args=(0,))
+    23|    t2 = Thread(target=buy, args=(1,))
+    24|    t1.start()
+    25|    t2.start()
+    26|    t1.join()
+    27|    t2.join()
+    28|    return results

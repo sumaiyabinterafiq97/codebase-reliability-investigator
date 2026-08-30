@@ -1,0 +1,29 @@
+Analyze repository_id=cri-08-log-then-use-corrupt.
+If no qualifying reliability issue is present, return {"findings": []} and stop.
+Do not invent an issue to fill the list.
+Return JSON using only the files below.
+
+repository_id: cri-08-log-then-use-corrupt
+file_count: 1
+Each file is listed with 1-based line numbers. Cite those line numbers.
+
+=== FILE billing.py (19 lines) ===
+     1|import logging
+     2|
+     3|log = logging.getLogger("billing")
+     4|
+     5|
+     6|def parse_customer(raw: dict) -> dict:
+     7|    try:
+     8|        account_id = raw["account_id"]
+     9|        cents = int(raw["balance_cents"])
+    10|        return {"account_id": account_id, "balance_cents": cents}
+    11|    except (KeyError, TypeError, ValueError) as exc:
+    12|        log.error("parse failed: %s raw=%s", exc, raw)
+    13|        return raw
+    14|
+    15|
+    16|def debit(raw: dict, amount_cents: int) -> dict:
+    17|    customer = parse_customer(raw)
+    18|    customer["balance_cents"] = customer["balance_cents"] - amount_cents
+    19|    return customer

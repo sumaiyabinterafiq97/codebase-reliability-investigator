@@ -1,0 +1,14 @@
+{
+  "repository_id": "cri-01-bare-except",
+  "bundle_sha256": "3ee842bc76e962bba173d8abbef6bff1aac4364b900985d025d1455df32e54e2",
+  "files": [
+    {
+      "path": "checkout.py",
+      "sha256": "0cae73279a1fa11fc561d2eeca6fd50c1370a19d538e6572f43ce7a5e6db1b26",
+      "line_count": 17
+    }
+  ],
+  "excluded": [
+    "README.md"
+  ]
+}

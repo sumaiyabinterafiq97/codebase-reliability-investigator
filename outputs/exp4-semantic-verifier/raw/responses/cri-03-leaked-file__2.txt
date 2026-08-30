@@ -1,0 +1,11 @@
+{
+  "decision": "reject",
+  "reason": "The file handle is closed in the try block after the write operation, so there is no resource leak if the write fails.",
+  "confidence": 0.9,
+  "evidence": {
+    "file": "audit.py",
+    "start_line": 5,
+    "end_line": 8,
+    "quote": "handle = open(path, \"a\", encoding=\"utf-8\")\ntry:\n    handle.write(line + \"\\n\")\n    handle.close()"
+  }
+}

@@ -1,0 +1,15 @@
+repository_id: cri-10-logged-reraise
+language: python
+issues: []
+red_herrings:
+  - issue_id: cri-10-rh1
+    category: error_handling
+    severity: medium
+    file: transfers.py
+    line: 17
+    function_name: transfer
+    description: Broad except Exception that logs and re-raises. Not an issue under the taxonomy.
+    why_reliability: Not a reliability defect; the exception still propagates.
+    expected_evidence: except Exception / log.exception / raise
+    present: false
+    difficulty: hard

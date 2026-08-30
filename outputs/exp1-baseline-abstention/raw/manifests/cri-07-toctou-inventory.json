@@ -1,0 +1,14 @@
+{
+  "repository_id": "cri-07-toctou-inventory",
+  "bundle_sha256": "048848832da60b41295141cf455ba60f4ee5c1a70137c781aa2b4084e69ac2a7",
+  "files": [
+    {
+      "path": "warehouse.py",
+      "sha256": "630be2ccf0d53b0d79a59938601cc848abf2eadcb3b3e244053246f1bd0d71b5",
+      "line_count": 28
+    }
+  ],
+  "excluded": [
+    "README.md"
+  ]
+}

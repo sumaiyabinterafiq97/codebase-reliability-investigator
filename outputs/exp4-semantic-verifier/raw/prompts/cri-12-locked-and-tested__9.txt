@@ -1,0 +1,64 @@
+repository_id: cri-12-locked-and-tested
+category: error_handling
+severity: high
+file: stock.py
+line: 12
+line_start: 12
+line_end: 13
+function_name: reserve
+description: The function updates the stock without handling the case where the stock might become negative, which can lead to an invalid state.
+
+TAXONOMY FOR THE CLAIMED CATEGORY:
+error_handling
+Qualifies: Control flow that hides, swallows, or continues after a failure in a way that can produce wrong results, lost errors, or an inconsistent program state. Includes bare except, returning sentinel success after failure, and catching exceptions then using invalid data.
+Does not qualify: Broad except Exception that logs and re-raises; catching a specific expected exception and returning a documented fallback that callers can distinguish.
+
+CLAIMED EVIDENCE QUOTE FROM THE FINDING:
+stock[sku] = available - n
+
+EXTRACTED SOURCE SNIPPET AT THE CLAIMED LOCATION:
+        stock[sku] = available - n
+        return True
+
+=== NEARBY stock.py lines 4-13 ===
+     4|stock = {"widget": 5}
+     5|
+     6|
+     7|def reserve(sku: str, n: int = 1) -> bool:
+     8|    with _lock:
+     9|        available = stock.get(sku, 0)
+    10|        if available < n:
+    11|            return False
+    12|        stock[sku] = available - n
+    13|        return True
+
+FULL SOURCE IN THIS REPOSITORY (for context only; do not hunt new issues):
+=== FILE stock.py ===
+     1|from threading import Lock
+     2|
+     3|_lock = Lock()
+     4|stock = {"widget": 5}
+     5|
+     6|
+     7|def reserve(sku: str, n: int = 1) -> bool:
+     8|    with _lock:
+     9|        available = stock.get(sku, 0)
+    10|        if available < n:
+    11|            return False
+    12|        stock[sku] = available - n
+    13|        return True
+
+=== FILE test_stock.py ===
+     1|from stock import reserve, stock
+     2|
+     3|
+     4|def test_reserve_ok():
+     5|    stock["widget"] = 2
+     6|    assert reserve("widget", 1) is True
+     7|    assert stock["widget"] == 1
+     8|
+     9|
+    10|def test_reserve_insufficient():
+    11|    stock["widget"] = 0
+    12|    assert reserve("widget", 1) is False
+    13|    assert stock["widget"] == 0

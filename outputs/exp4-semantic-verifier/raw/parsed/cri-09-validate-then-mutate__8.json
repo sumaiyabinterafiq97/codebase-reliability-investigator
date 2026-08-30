@@ -1,0 +1,28 @@
+{
+  "index": 8,
+  "repository_id": "cri-09-validate-then-mutate",
+  "category": "input_validation",
+  "file": "catalog.py",
+  "line": 7,
+  "decision": "reject",
+  "fail_open": false,
+  "parse_status": "ok",
+  "error": null,
+  "confidence": 0.0,
+  "reason": "The function does not validate the quantity part of the SKU payload, but the context shows that the input is already split and the error handling for invalid integer conversion is not demonstrated as a failure path.",
+  "runtime_seconds": 1.531913,
+  "prompt_tokens": 957,
+  "completion_tokens": 109,
+  "verifier_evidence_in_source": false,
+  "parsed": {
+    "decision": "reject",
+    "reason": "The function does not validate the quantity part of the SKU payload, but the context shows that the input is already split and the error handling for invalid integer conversion is not demonstrated as a failure path.",
+    "confidence": 0.0,
+    "evidence": {
+      "file": "catalog.py",
+      "start_line": 7,
+      "end_line": 7,
+      "quote": "sku, qty_s = item.split(':')"
+    }
+  }
+}

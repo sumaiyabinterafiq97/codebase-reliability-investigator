@@ -1,0 +1,40 @@
+repository_id: cri-02-unchecked-quantity
+category: input_validation
+severity: high
+file: orders.py
+line: 6
+line_start: 6
+line_end: 7
+function_name: apply_order
+description: The function applies an order without validating that the quantity is non-negative and does not exceed the available inventory, which can lead to negative inventory states.
+
+TAXONOMY FOR THE CLAIMED CATEGORY:
+input_validation
+Qualifies: Untrusted or external values used in domain operations without checks that prevent invalid states (empty, negative, wrong type after parse, missing required fields) where that invalid state can break invariants.
+Does not qualify: Missing validation on internal helpers when a public boundary already validates; style notes like "use pydantic" with no invalid-input path.
+
+CLAIMED EVIDENCE QUOTE FROM THE FINDING:
+inventory[sku] = inventory.get(sku, 0) - quantity
+
+EXTRACTED SOURCE SNIPPET AT THE CLAIMED LOCATION:
+def apply_order(sku: str, quantity: int) -> None:
+    inventory[sku] = inventory.get(sku, 0) - quantity
+
+=== NEARBY orders.py lines 1-7 ===
+     1|"""Inventory mutation without quantity checks."""
+     2|
+     3|inventory = {"sku-1": 10}
+     4|
+     5|
+     6|def apply_order(sku: str, quantity: int) -> None:
+     7|    inventory[sku] = inventory.get(sku, 0) - quantity
+
+FULL SOURCE IN THIS REPOSITORY (for context only; do not hunt new issues):
+=== FILE orders.py ===
+     1|"""Inventory mutation without quantity checks."""
+     2|
+     3|inventory = {"sku-1": 10}
+     4|
+     5|
+     6|def apply_order(sku: str, quantity: int) -> None:
+     7|    inventory[sku] = inventory.get(sku, 0) - quantity

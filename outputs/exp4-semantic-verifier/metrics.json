@@ -1,0 +1,200 @@
+{
+  "micro_precision": null,
+  "micro_recall": 0.0,
+  "micro_f1": null,
+  "macro_f1": 1.0,
+  "false_positive_count": 0,
+  "negative_repo_count": 3,
+  "negative_repos_with_findings": 0,
+  "repo_level_fpr": 0.0,
+  "severity_accuracy": null,
+  "evidence_grounding_accuracy": null,
+  "runtime_seconds_total": 19.972051,
+  "prompt_tokens_total": 9734,
+  "completion_tokens_total": 1082,
+  "estimated_cost_usd": null,
+  "per_repo": [
+    {
+      "repository_id": "cri-01-bare-except",
+      "tp": 0,
+      "fp": 0,
+      "fn": 1,
+      "precision": null,
+      "recall": 0.0,
+      "f1": null
+    },
+    {
+      "repository_id": "cri-02-unchecked-quantity",
+      "tp": 0,
+      "fp": 0,
+      "fn": 1,
+      "precision": null,
+      "recall": 0.0,
+      "f1": null
+    },
+    {
+      "repository_id": "cri-03-leaked-file",
+      "tp": 0,
+      "fp": 0,
+      "fn": 1,
+      "precision": null,
+      "recall": 0.0,
+      "f1": null
+    },
+    {
+      "repository_id": "cri-04-racy-balance",
+      "tp": 0,
+      "fp": 0,
+      "fn": 1,
+      "precision": null,
+      "recall": 0.0,
+      "f1": null
+    },
+    {
+      "repository_id": "cri-05-untested-fallback",
+      "tp": 0,
+      "fp": 0,
+      "fn": 1,
+      "precision": null,
+      "recall": 0.0,
+      "f1": null
+    },
+    {
+      "repository_id": "cri-06-silent-json-default",
+      "tp": 0,
+      "fp": 0,
+      "fn": 1,
+      "precision": null,
+      "recall": 0.0,
+      "f1": null
+    },
+    {
+      "repository_id": "cri-07-toctou-inventory",
+      "tp": 0,
+      "fp": 0,
+      "fn": 1,
+      "precision": null,
+      "recall": 0.0,
+      "f1": null
+    },
+    {
+      "repository_id": "cri-08-log-then-use-corrupt",
+      "tp": 0,
+      "fp": 0,
+      "fn": 1,
+      "precision": null,
+      "recall": 0.0,
+      "f1": null
+    },
+    {
+      "repository_id": "cri-09-validate-then-mutate",
+      "tp": 0,
+      "fp": 0,
+      "fn": 1,
+      "precision": null,
+      "recall": 0.0,
+      "f1": null
+    },
+    {
+      "repository_id": "cri-10-logged-reraise",
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0
+    },
+    {
+      "repository_id": "cri-11-clean-checkout",
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0
+    },
+    {
+      "repository_id": "cri-12-locked-and-tested",
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0
+    }
+  ],
+  "matches": [
+    {
+      "repository_id": "cri-01-bare-except",
+      "predicted_index": null,
+      "gold_issue_id": "cri-01-i1",
+      "kind": "fn",
+      "severity_match": null,
+      "evidence_grounded": null
+    },
+    {
+      "repository_id": "cri-02-unchecked-quantity",
+      "predicted_index": null,
+      "gold_issue_id": "cri-02-i1",
+      "kind": "fn",
+      "severity_match": null,
+      "evidence_grounded": null
+    },
+    {
+      "repository_id": "cri-03-leaked-file",
+      "predicted_index": null,
+      "gold_issue_id": "cri-03-i1",
+      "kind": "fn",
+      "severity_match": null,
+      "evidence_grounded": null
+    },
+    {
+      "repository_id": "cri-04-racy-balance",
+      "predicted_index": null,
+      "gold_issue_id": "cri-04-i1",
+      "kind": "fn",
+      "severity_match": null,
+      "evidence_grounded": null
+    },
+    {
+      "repository_id": "cri-05-untested-fallback",
+      "predicted_index": null,
+      "gold_issue_id": "cri-05-i1",
+      "kind": "fn",
+      "severity_match": null,
+      "evidence_grounded": null
+    },
+    {
+      "repository_id": "cri-06-silent-json-default",
+      "predicted_index": null,
+      "gold_issue_id": "cri-06-i1",
+      "kind": "fn",
+      "severity_match": null,
+      "evidence_grounded": null
+    },
+    {
+      "repository_id": "cri-07-toctou-inventory",
+      "predicted_index": null,
+      "gold_issue_id": "cri-07-i1",
+      "kind": "fn",
+      "severity_match": null,
+      "evidence_grounded": null
+    },
+    {
+      "repository_id": "cri-08-log-then-use-corrupt",
+      "predicted_index": null,
+      "gold_issue_id": "cri-08-i1",
+      "kind": "fn",
+      "severity_match": null,
+      "evidence_grounded": null
+    },
+    {
+      "repository_id": "cri-09-validate-then-mutate",
+      "predicted_index": null,
+      "gold_issue_id": "cri-09-i1",
+      "kind": "fn",
+      "severity_match": null,
+      "evidence_grounded": null
+    }
+  ]
+}

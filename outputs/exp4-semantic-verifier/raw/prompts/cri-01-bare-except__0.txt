@@ -1,0 +1,54 @@
+repository_id: cri-01-bare-except
+category: error_handling
+severity: high
+file: checkout.py
+line: 16
+line_start: 16
+line_end: 17
+function_name: checkout
+description: The exception is caught without handling it properly, leading to a misleading success response even when the charge fails.
+
+TAXONOMY FOR THE CLAIMED CATEGORY:
+error_handling
+Qualifies: Control flow that hides, swallows, or continues after a failure in a way that can produce wrong results, lost errors, or an inconsistent program state. Includes bare except, returning sentinel success after failure, and catching exceptions then using invalid data.
+Does not qualify: Broad except Exception that logs and re-raises; catching a specific expected exception and returning a documented fallback that callers can distinguish.
+
+CLAIMED EVIDENCE QUOTE FROM THE FINDING:
+except:
+        return {
+
+EXTRACTED SOURCE SNIPPET AT THE CLAIMED LOCATION:
+    except:
+        return {"status": "paid", "ref": "local-ok"}
+
+=== NEARBY checkout.py lines 8-17 ===
+     8|        raise RuntimeError("gateway timeout")
+     9|    return f"ok:{amount_cents}"
+    10|
+    11|
+    12|def checkout(card: str, amount_cents: int) -> dict:
+    13|    try:
+    14|        ref = charge(card, amount_cents)
+    15|        return {"status": "paid", "ref": ref}
+    16|    except:
+    17|        return {"status": "paid", "ref": "local-ok"}
+
+FULL SOURCE IN THIS REPOSITORY (for context only; do not hunt new issues):
+=== FILE checkout.py ===
+     1|# Tiny store checkout: failures in charge() are swallowed.
+     2|
+     3|def charge(card: str, amount_cents: int) -> str:
+     4|    if not card:
+     5|        raise ValueError("card required")
+     6|    # Pretend gateway
+     7|    if amount_cents > 10_000_00:
+     8|        raise RuntimeError("gateway timeout")
+     9|    return f"ok:{amount_cents}"
+    10|
+    11|
+    12|def checkout(card: str, amount_cents: int) -> dict:
+    13|    try:
+    14|        ref = charge(card, amount_cents)
+    15|        return {"status": "paid", "ref": ref}
+    16|    except:
+    17|        return {"status": "paid", "ref": "local-ok"}

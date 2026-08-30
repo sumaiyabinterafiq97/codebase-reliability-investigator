@@ -1,0 +1,14 @@
+{
+  "repository_id": "cri-08-log-then-use-corrupt",
+  "bundle_sha256": "6e416ad3c24066f740c2443a916ea7496d209df3f497c7b635de55ef896918a7",
+  "files": [
+    {
+      "path": "billing.py",
+      "sha256": "98702d268995090c1de01aecbf54666c5c9395ad78a9f7962be1114e86848dc2",
+      "line_count": 19
+    }
+  ],
+  "excluded": [
+    "README.md"
+  ]
+}

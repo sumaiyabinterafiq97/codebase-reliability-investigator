@@ -1,0 +1,98 @@
+[
+  {
+    "repository_id": "cri-01-bare-except",
+    "category": "error_handling",
+    "file": "checkout.py",
+    "line": 16,
+    "suppressed": false,
+    "filter": null
+  },
+  {
+    "repository_id": "cri-02-unchecked-quantity",
+    "category": "input_validation",
+    "file": "orders.py",
+    "line": 6,
+    "suppressed": false,
+    "filter": null
+  },
+  {
+    "repository_id": "cri-03-leaked-file",
+    "category": "resource_lifecycle",
+    "file": "audit.py",
+    "line": 1,
+    "suppressed": false,
+    "filter": null
+  },
+  {
+    "repository_id": "cri-04-racy-balance",
+    "category": "state_concurrency",
+    "file": "wallet.py",
+    "line": 1,
+    "suppressed": false,
+    "filter": null
+  },
+  {
+    "repository_id": "cri-05-untested-fallback",
+    "category": "testing_coverage",
+    "file": "payments.py",
+    "line": 24,
+    "suppressed": false,
+    "filter": null
+  },
+  {
+    "repository_id": "cri-06-silent-json-default",
+    "category": "error_handling",
+    "file": "config.py",
+    "line": 9,
+    "suppressed": false,
+    "filter": null
+  },
+  {
+    "repository_id": "cri-07-toctou-inventory",
+    "category": "state_concurrency",
+    "file": "warehouse.py",
+    "line": 11,
+    "suppressed": false,
+    "filter": null
+  },
+  {
+    "repository_id": "cri-08-log-then-use-corrupt",
+    "category": "error_handling",
+    "file": "billing.py",
+    "line": 13,
+    "suppressed": false,
+    "filter": null
+  },
+  {
+    "repository_id": "cri-09-validate-then-mutate",
+    "category": "input_validation",
+    "file": "catalog.py",
+    "line": 7,
+    "suppressed": false,
+    "filter": null
+  },
+  {
+    "repository_id": "cri-10-logged-reraise",
+    "category": "error_handling",
+    "file": "transfers.py",
+    "line": 17,
+    "suppressed": true,
+    "filter": "error_handling_reraise"
+  },
+  {
+    "repository_id": "cri-11-clean-checkout",
+    "category": "error_handling",
+    "file": "store.py",
+    "line": 20,
+    "suppressed": true,
+    "filter": "error_handling_reraise"
+  },
+  {
+    "repository_id": "cri-12-locked-and-tested",
+    "category": "error_handling",
+    "file": "stock.py",
+    "line": 12,
+    "suppressed": false,
+    "filter": null
+  }
+]

@@ -1,0 +1,18 @@
+repository_id: cri-09-validate-then-mutate
+file_count: 1
+Each file is listed with 1-based line numbers. Cite those line numbers.
+
+=== FILE catalog.py (13 lines) ===
+     1|"""SKU payload looks like 'sku:qty'. Only the whole string is checked."""
+     2|
+     3|
+     4|def parse_line(item: str) -> tuple[str, int]:
+     5|    if not isinstance(item, str) or not item.strip():
+     6|        raise ValueError("empty item")
+     7|    sku, qty_s = item.split(":")
+     8|    return sku, int(qty_s)
+     9|
+    10|
+    11|def restock(item: str, inventory: dict[str, int]) -> None:
+    12|    sku, qty = parse_line(item)
+    13|    inventory[sku] = inventory.get(sku, 0) + qty

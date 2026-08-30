@@ -1,0 +1,40 @@
+repository_id: cri-05-untested-fallback
+file_count: 2
+Each file is listed with 1-based line numbers. Cite those line numbers.
+
+=== FILE payments.py (28 lines) ===
+     1|"""Charge primary processor; fall back to secondary on timeout."""
+     2|
+     3|
+     4|class TimeoutError_(Exception):
+     5|    pass
+     6|
+     7|
+     8|def charge_primary(amount_cents: int) -> str:
+     9|    if amount_cents < 0:
+    10|        raise ValueError("amount")
+    11|    return f"primary:{amount_cents}"
+    12|
+    13|
+    14|def charge_secondary(amount_cents: int) -> str:
+    15|    return f"secondary:{amount_cents}"
+    16|
+    17|
+    18|def pay(amount_cents: int, primary_ok: bool = True) -> str:
+    19|    if not primary_ok:
+    20|        raise TimeoutError_("primary down")
+    21|    return charge_primary(amount_cents)
+    22|
+    23|
+    24|def checkout(amount_cents: int, primary_ok: bool = True) -> str:
+    25|    try:
+    26|        return pay(amount_cents, primary_ok=primary_ok)
+    27|    except TimeoutError_:
+    28|        return charge_secondary(amount_cents)
+
+=== FILE test_payments.py (5 lines) ===
+     1|from payments import checkout
+     2|
+     3|
+     4|def test_happy_path():
+     5|    assert checkout(100) == "primary:100"

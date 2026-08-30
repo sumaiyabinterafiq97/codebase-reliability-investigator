@@ -1,0 +1,282 @@
+[
+  {
+    "index": 0,
+    "repository_id": "cri-01-bare-except",
+    "category": "error_handling",
+    "file": "checkout.py",
+    "line": 16,
+    "decision": "reject",
+    "fail_open": false,
+    "parse_status": "ok",
+    "error": null,
+    "confidence": 0.8,
+    "reason": "The exception handling does not swallow the error; it simply returns a fallback response. The code does not indicate a misleading success response since it provides a specific fallback for failures.",
+    "runtime_seconds": 3.687586,
+    "prompt_tokens": 945,
+    "completion_tokens": 109,
+    "verifier_evidence_in_source": false,
+    "parsed": {
+      "decision": "reject",
+      "reason": "The exception handling does not swallow the error; it simply returns a fallback response. The code does not indicate a misleading success response since it provides a specific fallback for failures.",
+      "confidence": 0.8,
+      "evidence": {
+        "file": "checkout.py",
+        "start_line": 16,
+        "end_line": 17,
+        "quote": "return {'status': 'paid', 'ref': 'local-ok'}"
+      }
+    }
+  },
+  {
+    "index": 1,
+    "repository_id": "cri-02-unchecked-quantity",
+    "category": "input_validation",
+    "file": "orders.py",
+    "line": 6,
+    "decision": "reject",
+    "fail_open": false,
+    "parse_status": "ok",
+    "error": null,
+    "confidence": 0.7,
+    "reason": "The function does not validate the quantity, but there is no evidence of negative inventory states since the context does not show how 'quantity' is sourced or if it can be negative.",
+    "runtime_seconds": 2.06155,
+    "prompt_tokens": 801,
+    "completion_tokens": 112,
+    "verifier_evidence_in_source": true,
+    "parsed": {
+      "decision": "reject",
+      "reason": "The function does not validate the quantity, but there is no evidence of negative inventory states since the context does not show how 'quantity' is sourced or if it can be negative.",
+      "confidence": 0.7,
+      "evidence": {
+        "file": "orders.py",
+        "start_line": 6,
+        "end_line": 7,
+        "quote": "inventory[sku] = inventory.get(sku, 0) - quantity"
+      }
+    }
+  },
+  {
+    "index": 2,
+    "repository_id": "cri-03-leaked-file",
+    "category": "resource_lifecycle",
+    "file": "audit.py",
+    "line": 1,
+    "decision": "reject",
+    "fail_open": false,
+    "parse_status": "ok",
+    "error": null,
+    "confidence": 0.9,
+    "reason": "The file handle is closed in the try block after the write operation, so there is no resource leak if the write fails.",
+    "runtime_seconds": 1.702279,
+    "prompt_tokens": 886,
+    "completion_tokens": 120,
+    "verifier_evidence_in_source": false,
+    "parsed": {
+      "decision": "reject",
+      "reason": "The file handle is closed in the try block after the write operation, so there is no resource leak if the write fails.",
+      "confidence": 0.9,
+      "evidence": {
+        "file": "audit.py",
+        "start_line": 5,
+        "end_line": 8,
+        "quote": "handle = open(path, \"a\", encoding=\"utf-8\")\ntry:\n    handle.write(line + \"\\n\")\n    handle.close()"
+      }
+    }
+  },
+  {
+    "index": 3,
+    "repository_id": "cri-04-racy-balance",
+    "category": "state_concurrency",
+    "file": "wallet.py",
+    "line": 1,
+    "decision": "reject",
+    "fail_open": false,
+    "parse_status": "ok",
+    "error": null,
+    "confidence": 0.0,
+    "reason": "The code does not implement any locking mechanism, but the finding does not provide evidence of a concrete race condition occurring in practice.",
+    "runtime_seconds": 2.145861,
+    "prompt_tokens": 1040,
+    "completion_tokens": 95,
+    "verifier_evidence_in_source": true,
+    "parsed": {
+      "decision": "reject",
+      "reason": "The code does not implement any locking mechanism, but the finding does not provide evidence of a concrete race condition occurring in practice.",
+      "confidence": 0.0,
+      "evidence": {
+        "file": "wallet.py",
+        "start_line": 1,
+        "end_line": 1,
+        "quote": "Shared wallet updated from many threads with no lock."
+      }
+    }
+  },
+  {
+    "index": 4,
+    "repository_id": "cri-05-untested-fallback",
+    "category": "testing_coverage",
+    "file": "payments.py",
+    "line": 24,
+    "decision": "reject",
+    "fail_open": false,
+    "parse_status": "ok",
+    "error": null,
+    "confidence": 0.0,
+    "reason": "The finding does not provide evidence that the fallback path is untested; the test provided only needs to cover the primary payment path.",
+    "runtime_seconds": 1.711932,
+    "prompt_tokens": 1145,
+    "completion_tokens": 138,
+    "verifier_evidence_in_source": true,
+    "parsed": {
+      "decision": "reject",
+      "reason": "The finding does not provide evidence that the fallback path is untested; the test provided only needs to cover the primary payment path.",
+      "confidence": 0.0,
+      "evidence": {
+        "file": "payments.py",
+        "start_line": 24,
+        "end_line": 28,
+        "quote": "def checkout(amount_cents: int, primary_ok: bool = True) -> str:\n    try:\n        return pay(amount_cents, primary_ok=primary_ok)\n    except TimeoutError_:\n        return charge_secondary(amount_cents)"
+      }
+    }
+  },
+  {
+    "index": 5,
+    "repository_id": "cri-06-silent-json-default",
+    "category": "error_handling",
+    "file": "config.py",
+    "line": 9,
+    "decision": "reject",
+    "fail_open": false,
+    "parse_status": "ok",
+    "error": null,
+    "confidence": 0.9,
+    "reason": "The empty dictionary return is a documented fallback for specific exceptions, allowing callers to handle the failure appropriately.",
+    "runtime_seconds": 1.594567,
+    "prompt_tokens": 880,
+    "completion_tokens": 93,
+    "verifier_evidence_in_source": false,
+    "parsed": {
+      "decision": "reject",
+      "reason": "The empty dictionary return is a documented fallback for specific exceptions, allowing callers to handle the failure appropriately.",
+      "confidence": 0.9,
+      "evidence": {
+        "file": "config.py",
+        "start_line": 8,
+        "end_line": 9,
+        "quote": "except (OSError, json.JSONDecodeError): return {}"
+      }
+    }
+  },
+  {
+    "index": 6,
+    "repository_id": "cri-07-toctou-inventory",
+    "category": "state_concurrency",
+    "file": "warehouse.py",
+    "line": 11,
+    "decision": "reject",
+    "fail_open": false,
+    "parse_status": "ok",
+    "error": null,
+    "confidence": 0.8,
+    "reason": "The code does not demonstrate a race condition because the check and decrement are not executed concurrently due to the lack of a shared state across threads in the provided context.",
+    "runtime_seconds": 2.582646,
+    "prompt_tokens": 1064,
+    "completion_tokens": 104,
+    "verifier_evidence_in_source": true,
+    "parsed": {
+      "decision": "reject",
+      "reason": "The code does not demonstrate a race condition because the check and decrement are not executed concurrently due to the lack of a shared state across threads in the provided context.",
+      "confidence": 0.8,
+      "evidence": {
+        "file": "warehouse.py",
+        "start_line": 11,
+        "end_line": 11,
+        "quote": "stock[sku] = stock[sku] - n"
+      }
+    }
+  },
+  {
+    "index": 7,
+    "repository_id": "cri-08-log-then-use-corrupt",
+    "category": "error_handling",
+    "file": "billing.py",
+    "line": 13,
+    "decision": "reject",
+    "fail_open": false,
+    "parse_status": "ok",
+    "error": null,
+    "confidence": 0.8,
+    "reason": "The function logs the error and returns the raw input, which may be valid in some contexts. There is no evidence that this leads to corrupt data usage without further context on how the returned data is handled.",
+    "runtime_seconds": 1.485551,
+    "prompt_tokens": 1016,
+    "completion_tokens": 117,
+    "verifier_evidence_in_source": true,
+    "parsed": {
+      "decision": "reject",
+      "reason": "The function logs the error and returns the raw input, which may be valid in some contexts. There is no evidence that this leads to corrupt data usage without further context on how the returned data is handled.",
+      "confidence": 0.8,
+      "evidence": {
+        "file": "billing.py",
+        "start_line": 12,
+        "end_line": 13,
+        "quote": "log.error(\"parse failed: %s raw=%s\", exc, raw)"
+      }
+    }
+  },
+  {
+    "index": 8,
+    "repository_id": "cri-09-validate-then-mutate",
+    "category": "input_validation",
+    "file": "catalog.py",
+    "line": 7,
+    "decision": "reject",
+    "fail_open": false,
+    "parse_status": "ok",
+    "error": null,
+    "confidence": 0.0,
+    "reason": "The function does not validate the quantity part of the SKU payload, but the context shows that the input is already split and the error handling for invalid integer conversion is not demonstrated as a failure path.",
+    "runtime_seconds": 1.531913,
+    "prompt_tokens": 957,
+    "completion_tokens": 109,
+    "verifier_evidence_in_source": false,
+    "parsed": {
+      "decision": "reject",
+      "reason": "The function does not validate the quantity part of the SKU payload, but the context shows that the input is already split and the error handling for invalid integer conversion is not demonstrated as a failure path.",
+      "confidence": 0.0,
+      "evidence": {
+        "file": "catalog.py",
+        "start_line": 7,
+        "end_line": 7,
+        "quote": "sku, qty_s = item.split(':')"
+      }
+    }
+  },
+  {
+    "index": 9,
+    "repository_id": "cri-12-locked-and-tested",
+    "category": "error_handling",
+    "file": "stock.py",
+    "line": 12,
+    "decision": "reject",
+    "fail_open": false,
+    "parse_status": "ok",
+    "error": null,
+    "confidence": 0.9,
+    "reason": "The function correctly checks if there is enough stock before updating, preventing negative stock values.",
+    "runtime_seconds": 1.468166,
+    "prompt_tokens": 1000,
+    "completion_tokens": 85,
+    "verifier_evidence_in_source": false,
+    "parsed": {
+      "decision": "reject",
+      "reason": "The function correctly checks if there is enough stock before updating, preventing negative stock values.",
+      "confidence": 0.9,
+      "evidence": {
+        "file": "stock.py",
+        "start_line": 10,
+        "end_line": 11,
+        "quote": "if available < n: return False"
+      }
+    }
+  }
+]

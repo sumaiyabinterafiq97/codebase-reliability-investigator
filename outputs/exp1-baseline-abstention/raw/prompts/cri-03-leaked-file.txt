@@ -1,0 +1,21 @@
+Analyze repository_id=cri-03-leaked-file.
+If no qualifying reliability issue is present, return {"findings": []} and stop.
+Do not invent an issue to fill the list.
+Return JSON using only the files below.
+
+repository_id: cri-03-leaked-file
+file_count: 1
+Each file is listed with 1-based line numbers. Cite those line numbers.
+
+=== FILE audit.py (11 lines) ===
+     1|"""Write an audit line; handle is not closed if write fails."""
+     2|
+     3|
+     4|def append_audit(path: str, line: str) -> bool:
+     5|    handle = open(path, "a", encoding="utf-8")
+     6|    try:
+     7|        handle.write(line + "\n")
+     8|        handle.close()
+     9|        return True
+    10|    except OSError:
+    11|        return False

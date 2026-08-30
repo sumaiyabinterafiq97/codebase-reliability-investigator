@@ -1,0 +1,11 @@
+{
+  "decision": "reject",
+  "reason": "The code does not demonstrate a race condition because the check and decrement are not executed concurrently due to the lack of a shared state across threads in the provided context.",
+  "confidence": 0.8,
+  "evidence": {
+    "file": "warehouse.py",
+    "start_line": 11,
+    "end_line": 11,
+    "quote": "stock[sku] = stock[sku] - n"
+  }
+}

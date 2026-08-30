@@ -1,0 +1,28 @@
+{
+  "index": 7,
+  "repository_id": "cri-08-log-then-use-corrupt",
+  "category": "error_handling",
+  "file": "billing.py",
+  "line": 13,
+  "decision": "reject",
+  "fail_open": false,
+  "parse_status": "ok",
+  "error": null,
+  "confidence": 0.8,
+  "reason": "The function logs the error and returns the raw input, which may be valid in some contexts. There is no evidence that this leads to corrupt data usage without further context on how the returned data is handled.",
+  "runtime_seconds": 1.485551,
+  "prompt_tokens": 1016,
+  "completion_tokens": 117,
+  "verifier_evidence_in_source": true,
+  "parsed": {
+    "decision": "reject",
+    "reason": "The function logs the error and returns the raw input, which may be valid in some contexts. There is no evidence that this leads to corrupt data usage without further context on how the returned data is handled.",
+    "confidence": 0.8,
+    "evidence": {
+      "file": "billing.py",
+      "start_line": 12,
+      "end_line": 13,
+      "quote": "log.error(\"parse failed: %s raw=%s\", exc, raw)"
+    }
+  }
+}

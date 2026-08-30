@@ -1,0 +1,14 @@
+{
+  "repository_id": "cri-11-clean-checkout",
+  "bundle_sha256": "224e1eac332b62a1d81d567030acca5ca8d8a5dec19c05a5c47590c5f079eb68",
+  "files": [
+    {
+      "path": "store.py",
+      "sha256": "0e4287ca32b5642e7e14db02c7036720bab899db4952dd16bbf8077717591753",
+      "line_count": 27
+    }
+  ],
+  "excluded": [
+    "README.md"
+  ]
+}

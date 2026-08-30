@@ -1,0 +1,51 @@
+repository_id: cri-09-validate-then-mutate
+category: input_validation
+severity: medium
+file: catalog.py
+line: 7
+line_start: 7
+line_end: 7
+function_name: parse_line
+description: The code does not validate that the quantity part of the SKU payload is a valid integer before converting it, which could lead to a ValueError if the input is malformed.
+
+TAXONOMY FOR THE CLAIMED CATEGORY:
+input_validation
+Qualifies: Untrusted or external values used in domain operations without checks that prevent invalid states (empty, negative, wrong type after parse, missing required fields) where that invalid state can break invariants.
+Does not qualify: Missing validation on internal helpers when a public boundary already validates; style notes like "use pydantic" with no invalid-input path.
+
+CLAIMED EVIDENCE QUOTE FROM THE FINDING:
+sku, qty_s = item.split(":")
+
+EXTRACTED SOURCE SNIPPET AT THE CLAIMED LOCATION:
+    sku, qty_s = item.split(":")
+
+=== NEARBY catalog.py lines 1-13 ===
+     1|"""SKU payload looks like 'sku:qty'. Only the whole string is checked."""
+     2|
+     3|
+     4|def parse_line(item: str) -> tuple[str, int]:
+     5|    if not isinstance(item, str) or not item.strip():
+     6|        raise ValueError("empty item")
+     7|    sku, qty_s = item.split(":")
+     8|    return sku, int(qty_s)
+     9|
+    10|
+    11|def restock(item: str, inventory: dict[str, int]) -> None:
+    12|    sku, qty = parse_line(item)
+    13|    inventory[sku] = inventory.get(sku, 0) + qty
+
+FULL SOURCE IN THIS REPOSITORY (for context only; do not hunt new issues):
+=== FILE catalog.py ===
+     1|"""SKU payload looks like 'sku:qty'. Only the whole string is checked."""
+     2|
+     3|
+     4|def parse_line(item: str) -> tuple[str, int]:
+     5|    if not isinstance(item, str) or not item.strip():
+     6|        raise ValueError("empty item")
+     7|    sku, qty_s = item.split(":")
+     8|    return sku, int(qty_s)
+     9|
+    10|
+    11|def restock(item: str, inventory: dict[str, int]) -> None:
+    12|    sku, qty = parse_line(item)
+    13|    inventory[sku] = inventory.get(sku, 0) + qty

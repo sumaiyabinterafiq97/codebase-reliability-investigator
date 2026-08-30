@@ -1,0 +1,14 @@
+{
+  "repository_id": "cri-06-silent-json-default",
+  "bundle_sha256": "6cc8992c276434b49cff38ce892b7305980ab110eed8d2544b47e8fdb0095d84",
+  "files": [
+    {
+      "path": "config.py",
+      "sha256": "89ccae70a568235be47a32effd62d54570f01d6e4772d4a05027e2afaae7b636",
+      "line_count": 14
+    }
+  ],
+  "excluded": [
+    "README.md"
+  ]
+}

@@ -1,0 +1,14 @@
+repository_id: cri-06-silent-json-default
+language: python
+issues:
+  - issue_id: cri-06-i1
+    category: error_handling
+    severity: high
+    file: config.py
+    line: 9
+    function_name: load_settings
+    description: JSON/IO failure is replaced with an empty dict that looks like a successful load.
+    why_reliability: Callers such as max_connections cannot distinguish missing config from valid empty settings; failures are silent until a later KeyError or wrong default.
+    expected_evidence: "except (OSError, json.JSONDecodeError): return {}."
+    present: true
+    difficulty: medium

@@ -1,0 +1,19 @@
+{
+  "repository_id": "cri-12-locked-and-tested",
+  "bundle_sha256": "15a18bd722ce2b787b289f5046300e568193de206569d096d9dc35ba5620e6fe",
+  "files": [
+    {
+      "path": "stock.py",
+      "sha256": "0499d1d3eadb6442d4bb25cbab274b7aae079d047fffab3189bc9ea355e9029f",
+      "line_count": 13
+    },
+    {
+      "path": "test_stock.py",
+      "sha256": "ff95ff795aca7e1cff0ad9b6e5c1da390e6441d40acdb43c3180533ddca236cb",
+      "line_count": 13
+    }
+  ],
+  "excluded": [
+    "README.md"
+  ]
+}

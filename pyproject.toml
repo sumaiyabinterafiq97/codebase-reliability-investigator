@@ -1,0 +1,35 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "codebase-reliability-investigator"
+version = "0.1.0"
+description = "Investigate software reliability issues in small codebases with a simple baseline and an advanced agent, evaluated on a shared synthetic benchmark."
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+authors = [{ name = "CRI team" }]
+dependencies = [
+  "pydantic>=2.0",
+  "pyyaml>=6.0",
+  "certifi>=2024.0",
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=8.0",
+]
+
+[project.scripts]
+cri-eval = "cri.evaluation.cli:main"
+cri-baseline = "cri.baseline.cli:main"
+cri-postprocess = "cri.verify.cli:main"
+cri-verify = "cri.verify.verifier_cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]

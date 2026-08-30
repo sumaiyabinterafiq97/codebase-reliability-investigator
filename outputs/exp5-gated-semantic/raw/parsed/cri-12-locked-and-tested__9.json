@@ -1,0 +1,31 @@
+{
+  "index": 9,
+  "repository_id": "cri-12-locked-and-tested",
+  "category": "error_handling",
+  "file": "stock.py",
+  "line": 12,
+  "gated": true,
+  "semantic_review": "confirm",
+  "decision": "confirm",
+  "kept": true,
+  "fail_open": false,
+  "parse_status": "ok",
+  "error": null,
+  "confidence": 0.9,
+  "reason": "The enclosing block does not prevent the stock from becoming negative, as it only checks if available is less than n before updating.",
+  "runtime_seconds": 2.552318,
+  "prompt_tokens": 682,
+  "completion_tokens": 94,
+  "llm_calls": 1,
+  "parsed": {
+    "decision": "confirm",
+    "reason": "The enclosing block does not prevent the stock from becoming negative, as it only checks if available is less than n before updating.",
+    "confidence": 0.9,
+    "evidence": {
+      "file": "stock.py",
+      "start_line": 12,
+      "end_line": 13,
+      "quote": "stock[sku] = available - n"
+    }
+  }
+}

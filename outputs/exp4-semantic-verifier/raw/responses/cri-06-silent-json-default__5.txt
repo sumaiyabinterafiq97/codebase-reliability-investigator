@@ -1,0 +1,11 @@
+{
+  "decision": "reject",
+  "reason": "The empty dictionary return is a documented fallback for specific exceptions, allowing callers to handle the failure appropriately.",
+  "confidence": 0.9,
+  "evidence": {
+    "file": "config.py",
+    "start_line": 8,
+    "end_line": 9,
+    "quote": "except (OSError, json.JSONDecodeError): return {}"
+  }
+}

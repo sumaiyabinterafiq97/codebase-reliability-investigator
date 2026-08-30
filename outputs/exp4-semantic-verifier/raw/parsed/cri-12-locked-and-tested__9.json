@@ -1,0 +1,28 @@
+{
+  "index": 9,
+  "repository_id": "cri-12-locked-and-tested",
+  "category": "error_handling",
+  "file": "stock.py",
+  "line": 12,
+  "decision": "reject",
+  "fail_open": false,
+  "parse_status": "ok",
+  "error": null,
+  "confidence": 0.9,
+  "reason": "The function correctly checks if there is enough stock before updating, preventing negative stock values.",
+  "runtime_seconds": 1.468166,
+  "prompt_tokens": 1000,
+  "completion_tokens": 85,
+  "verifier_evidence_in_source": false,
+  "parsed": {
+    "decision": "reject",
+    "reason": "The function correctly checks if there is enough stock before updating, preventing negative stock values.",
+    "confidence": 0.9,
+    "evidence": {
+      "file": "stock.py",
+      "start_line": 10,
+      "end_line": 11,
+      "quote": "if available < n: return False"
+    }
+  }
+}

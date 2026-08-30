@@ -1,0 +1,11 @@
+{
+  "decision": "reject",
+  "reason": "The finding does not provide evidence that the fallback path is untested; the test provided only needs to cover the primary payment path.",
+  "confidence": 0.0,
+  "evidence": {
+    "file": "payments.py",
+    "start_line": 24,
+    "end_line": 28,
+    "quote": "def checkout(amount_cents: int, primary_ok: bool = True) -> str:\n    try:\n        return pay(amount_cents, primary_ok=primary_ok)\n    except TimeoutError_:\n        return charge_secondary(amount_cents)"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "repository_id": "cri-05-untested-fallback",
+  "bundle_sha256": "f03d824d22b50f07cbce6f3faa79a0597aeefd8a90506d590f0e8f08c160ded2",
+  "files": [
+    {
+      "path": "payments.py",
+      "sha256": "6d6afcdbda24ae22cd9413d8d6ddbaf59c8e135d4214dbf2a9ea2f6d29a40e23",
+      "line_count": 28
+    },
+    {
+      "path": "test_payments.py",
+      "sha256": "ce9cb0352b301a49c086d494420af558154566fdef8d0cbead370730ee74cae2",
+      "line_count": 5
+    }
+  ],
+  "excluded": [
+    "README.md"
+  ]
+}

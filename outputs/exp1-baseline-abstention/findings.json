@@ -1,0 +1,141 @@
+{
+  "system": "baseline-abstention",
+  "findings": [
+    {
+      "repository_id": "cri-01-bare-except",
+      "category": "error_handling",
+      "severity": "high",
+      "file": "checkout.py",
+      "line": 16,
+      "line_start": 16,
+      "line_end": 17,
+      "function_name": "checkout",
+      "description": "The exception is caught without handling specific errors, leading to a false success response even when charge() fails.",
+      "evidence": {
+        "file": "checkout.py",
+        "line_start": 16,
+        "line_end": 17,
+        "quote": "except: return {\"status\": \"paid\", \"ref\": \"local-ok\"}"
+      }
+    },
+    {
+      "repository_id": "cri-02-unchecked-quantity",
+      "category": "input_validation",
+      "severity": "medium",
+      "file": "orders.py",
+      "line": 6,
+      "line_start": 6,
+      "line_end": 7,
+      "function_name": "apply_order",
+      "description": "The function applies an order without validating that the quantity is a positive integer or that it does not result in negative inventory.",
+      "evidence": {
+        "file": "orders.py",
+        "line_start": 6,
+        "line_end": 7,
+        "quote": "inventory[sku] = inventory.get(sku, 0) - quantity"
+      }
+    },
+    {
+      "repository_id": "cri-03-leaked-file",
+      "category": "resource_lifecycle",
+      "severity": "medium",
+      "file": "audit.py",
+      "line": 5,
+      "line_start": 5,
+      "line_end": 11,
+      "function_name": "append_audit",
+      "description": "File handle is not closed if write fails, leading to resource leak.",
+      "evidence": {
+        "file": "audit.py",
+        "line_start": 5,
+        "line_end": 11,
+        "quote": "handle = open(path, \"a\", encoding=\"utf-8\")\n    try:\n        handle.write(line + \"\\n\")\n    except OSError:"
+      }
+    },
+    {
+      "repository_id": "cri-04-racy-balance",
+      "category": "state_concurrency",
+      "severity": "high",
+      "file": "wallet.py",
+      "line": 8,
+      "line_start": 8,
+      "line_end": 11,
+      "function_name": "credit",
+      "description": "Shared mutable state 'balance_cents' is updated concurrently without adequate synchronization, leading to potential race conditions.",
+      "evidence": {
+        "file": "wallet.py",
+        "line_start": 8,
+        "line_end": 11,
+        "quote": "balance_cents = current + amount_cents"
+      }
+    },
+    {
+      "repository_id": "cri-05-untested-fallback",
+      "category": "testing_coverage",
+      "severity": "high",
+      "file": "test_payments.py",
+      "line": 4,
+      "line_start": 4,
+      "line_end": 5,
+      "function_name": "test_happy_path",
+      "description": "The fallback path to charge the secondary processor on timeout is not tested.",
+      "evidence": {
+        "file": "test_payments.py",
+        "line_start": 4,
+        "line_end": 5,
+        "quote": "assert checkout(100) == \"primary:100\""
+      }
+    },
+    {
+      "repository_id": "cri-06-silent-json-default",
+      "category": "error_handling",
+      "severity": "high",
+      "file": "config.py",
+      "line": 9,
+      "line_start": 8,
+      "line_end": 9,
+      "function_name": "load_settings",
+      "description": "The function swallows exceptions and returns an empty dictionary, which can lead to a failure in max_connections when accessing a missing key.",
+      "evidence": {
+        "file": "config.py",
+        "line_start": 8,
+        "line_end": 9,
+        "quote": "except (OSError, json.JSONDecodeError):\n        return {}"
+      }
+    },
+    {
+      "repository_id": "cri-07-toctou-inventory",
+      "category": "state_concurrency",
+      "severity": "high",
+      "file": "warehouse.py",
+      "line": 11,
+      "line_start": 11,
+      "line_end": 11,
+      "function_name": "reserve",
+      "description": "Concurrent access to stock can lead to race conditions where multiple threads can reserve the same item, resulting in an invalid state.",
+      "evidence": {
+        "file": "warehouse.py",
+        "line_start": 11,
+        "line_end": 11,
+        "quote": "stock[sku] = stock[sku] - n"
+      }
+    },
+    {
+      "repository_id": "cri-08-log-then-use-corrupt",
+      "category": "error_handling",
+      "severity": "high",
+      "file": "billing.py",
+      "line": 13,
+      "line_start": 13,
+      "line_end": 13,
+      "function_name": "parse_customer",
+      "description": "Returning the raw input after a parsing failure can lead to using corrupt data in subsequent operations.",
+      "evidence": {
+        "file": "billing.py",
+        "line_start": 13,
+        "line_end": 13,
+        "quote": "return raw"
+      }
+    }
+  ]
+}

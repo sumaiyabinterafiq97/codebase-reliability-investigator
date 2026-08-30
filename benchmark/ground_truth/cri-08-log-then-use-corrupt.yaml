@@ -1,0 +1,14 @@
+repository_id: cri-08-log-then-use-corrupt
+language: python
+issues:
+  - issue_id: cri-08-i1
+    category: error_handling
+    severity: high
+    file: billing.py
+    line: 13
+    function_name: parse_customer
+    description: Parse failures are logged but the original raw dict is returned and then debited.
+    why_reliability: Logging is not handling; debit may mutate invalid shapes or use a non-int balance.
+    expected_evidence: log.error then return raw; debit uses parse_customer result without checking.
+    present: true
+    difficulty: hard

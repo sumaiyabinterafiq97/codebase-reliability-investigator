@@ -1,0 +1,28 @@
+{
+  "index": 5,
+  "repository_id": "cri-06-silent-json-default",
+  "category": "error_handling",
+  "file": "config.py",
+  "line": 9,
+  "decision": "reject",
+  "fail_open": false,
+  "parse_status": "ok",
+  "error": null,
+  "confidence": 0.9,
+  "reason": "The empty dictionary return is a documented fallback for specific exceptions, allowing callers to handle the failure appropriately.",
+  "runtime_seconds": 1.594567,
+  "prompt_tokens": 880,
+  "completion_tokens": 93,
+  "verifier_evidence_in_source": false,
+  "parsed": {
+    "decision": "reject",
+    "reason": "The empty dictionary return is a documented fallback for specific exceptions, allowing callers to handle the failure appropriately.",
+    "confidence": 0.9,
+    "evidence": {
+      "file": "config.py",
+      "start_line": 8,
+      "end_line": 9,
+      "quote": "except (OSError, json.JSONDecodeError): return {}"
+    }
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "decision": "reject",
+  "reason": "The code does not implement any locking mechanism, but the finding does not provide evidence of a concrete race condition occurring in practice.",
+  "confidence": 0.0,
+  "evidence": {
+    "file": "wallet.py",
+    "start_line": 1,
+    "end_line": 1,
+    "quote": "Shared wallet updated from many threads with no lock."
+  }
+}

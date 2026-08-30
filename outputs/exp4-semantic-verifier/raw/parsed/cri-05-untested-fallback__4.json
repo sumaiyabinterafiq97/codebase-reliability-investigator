@@ -1,0 +1,28 @@
+{
+  "index": 4,
+  "repository_id": "cri-05-untested-fallback",
+  "category": "testing_coverage",
+  "file": "payments.py",
+  "line": 24,
+  "decision": "reject",
+  "fail_open": false,
+  "parse_status": "ok",
+  "error": null,
+  "confidence": 0.0,
+  "reason": "The finding does not provide evidence that the fallback path is untested; the test provided only needs to cover the primary payment path.",
+  "runtime_seconds": 1.711932,
+  "prompt_tokens": 1145,
+  "completion_tokens": 138,
+  "verifier_evidence_in_source": true,
+  "parsed": {
+    "decision": "reject",
+    "reason": "The finding does not provide evidence that the fallback path is untested; the test provided only needs to cover the primary payment path.",
+    "confidence": 0.0,
+    "evidence": {
+      "file": "payments.py",
+      "start_line": 24,
+      "end_line": 28,
+      "quote": "def checkout(amount_cents: int, primary_ok: bool = True) -> str:\n    try:\n        return pay(amount_cents, primary_ok=primary_ok)\n    except TimeoutError_:\n        return charge_secondary(amount_cents)"
+    }
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "decision": "reject",
+  "reason": "The function does not validate the quantity, but there is no evidence of negative inventory states since the context does not show how 'quantity' is sourced or if it can be negative.",
+  "confidence": 0.7,
+  "evidence": {
+    "file": "orders.py",
+    "start_line": 6,
+    "end_line": 7,
+    "quote": "inventory[sku] = inventory.get(sku, 0) - quantity"
+  }
+}

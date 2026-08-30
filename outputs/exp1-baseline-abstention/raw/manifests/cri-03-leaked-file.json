@@ -1,0 +1,14 @@
+{
+  "repository_id": "cri-03-leaked-file",
+  "bundle_sha256": "fdedbdbe330fbe2dd44b40963d6ddb1503e4d4122a089120a5565c527727d023",
+  "files": [
+    {
+      "path": "audit.py",
+      "sha256": "f2664b7a4844e1ef8f7619e273a829c7979790cf4915ed69da5df009e9992d69",
+      "line_count": 11
+    }
+  ],
+  "excluded": [
+    "README.md"
+  ]
+}
